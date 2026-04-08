@@ -13,8 +13,6 @@
   --muted:#999;--shadow:0 2px 16px rgba(0,0,0,.09);
 }
 body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);min-height:100vh;display:flex;flex-direction:column}
-
-/* HEADER */
 .header{background:var(--black);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-mark{width:26px;height:26px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
@@ -23,44 +21,60 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 .logo-text span{color:var(--green)}
 .badge{font-size:10px;font-weight:600;color:rgba(255,255,255,.35);font-family:'DM Mono',monospace;letter-spacing:.06em;border:1px solid rgba(255,255,255,.15);padding:3px 7px;border-radius:20px}
 
-/* PAGES */
-/* Home page — centered input */
+/* HOME */
 #home-page{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 60px}
 .home-icon{width:56px;height:56px;background:var(--black);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
 .home-icon svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .home-title{font-size:26px;font-weight:700;margin-bottom:8px;text-align:center}
 .home-sub{font-size:14px;color:var(--muted);line-height:1.6;text-align:center;max-width:360px;margin-bottom:32px}
-
-/* Input card — centered on home, fixed bottom on chat */
 .input-card{width:100%;max-width:580px;display:flex;flex-direction:column;gap:10px}
 
-/* Ask bar */
+/* PROPERTY AUTOCOMPLETE ROW */
+.property-row{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:border-color .15s}
+.property-row:focus-within{border-color:var(--green)}
+.property-icon{font-size:15px;flex-shrink:0}
+.property-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.property-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
+.property-input{flex:1;border:none;outline:none;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--black);background:transparent}
+.property-input::placeholder{color:#bbb}
+.property-clear{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:0 2px;display:none;flex-shrink:0}
+.property-clear.visible{display:block}
+
+/* DROPDOWN */
+.prop-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;display:none;max-height:220px;overflow-y:auto}
+.prop-dropdown.open{display:block}
+.prop-opt{padding:10px 14px;font-size:14px;cursor:pointer;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--border)}
+.prop-opt:last-child{border-bottom:none}
+.prop-opt:hover,.prop-opt.active{background:var(--green-dim)}
+.prop-opt-name{font-weight:600;font-size:13px}
+.prop-opt-sub{font-size:11px;color:var(--muted)}
+.prop-loading{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
+.prop-none{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
+
+/* SELECTED PROPERTY PILL */
+.prop-pill{display:none;align-items:center;gap:6px;background:var(--green-dim);border:1.5px solid var(--green);border-radius:12px;padding:8px 12px}
+.prop-pill.visible{display:flex}
+.prop-pill-text{font-size:13px;font-weight:600;color:var(--green);flex:1}
+.prop-pill-clear{background:none;border:none;cursor:pointer;font-size:16px;color:var(--green);padding:0;line-height:1}
+
+/* ASK BAR */
 .ask-row{display:flex;gap:8px;align-items:flex-end}
-.ask-wrap{flex:1;position:relative}
-.ask-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--black);background:#fff;resize:none;min-height:52px;max-height:140px;line-height:1.4;transition:border-color .15s;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.ask-input{flex:1;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--black);background:#fff;resize:none;min-height:52px;max-height:140px;line-height:1.4;transition:border-color .15s;box-shadow:0 1px 6px rgba(0,0,0,.05)}
 .ask-input:focus{outline:none;border-color:var(--black)}
 .ask-input::placeholder{color:#bbb}
 .send-btn{width:52px;height:52px;border-radius:14px;background:var(--black);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .send-btn:hover{background:#333}
 .send-btn:disabled{background:var(--border);cursor:not-allowed}
 .send-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-
-/* Property row */
-.property-row{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.property-icon{font-size:15px;flex-shrink:0}
-.property-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
-.property-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
-.property-input{flex:1;border:none;outline:none;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--black);background:transparent}
-.property-input::placeholder{color:#bbb}
 .hint{font-size:11px;color:var(--muted);text-align:center;font-family:'DM Mono',monospace;letter-spacing:.02em}
 
-/* Chat page */
+/* CHAT PAGE */
 #chat-page{flex:1;display:none;flex-direction:column;overflow:hidden}
 .chat-msgs{flex:1;overflow-y:auto;padding:20px 16px 12px;display:flex;flex-direction:column;gap:14px;max-width:680px;width:100%;margin:0 auto}
 .chat-bottom{border-top:1px solid var(--border);background:var(--gray);padding:12px 16px 20px}
 .chat-bottom-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
 
-/* Messages */
+/* MESSAGES */
 .msg{display:flex;flex-direction:column;animation:fadeUp .18s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 .msg.user{align-items:flex-end}
@@ -102,24 +116,36 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
   <div class="badge">AI · BETA</div>
 </div>
 
-<!-- HOME PAGE — everything centred -->
+<!-- HOME PAGE -->
 <div id="home-page">
   <div class="home-icon">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
   </div>
   <div class="home-title">Ask me anything</div>
-  <div class="home-sub">Type a guest issue, property question, or process question. Add a property address for specific answers.</div>
+  <div class="home-sub">Type a guest issue, property question, or operational question. Search for a property below for specific answers.</div>
+
   <div class="input-card">
-    <div class="property-row">
-      <span class="property-icon">📍</span>
-      <span class="property-label">PROPERTY</span>
-      <div class="property-divider"></div>
-      <input type="text" class="property-input" id="home-property" placeholder="Address, building, or unit (optional)">
-    </div>
-    <div class="ask-row">
-      <div class="ask-wrap">
-        <textarea class="ask-input" id="home-ask" placeholder="e.g. Guest says the door code isn't working at 606 135 13th Ave SW..." rows="1" onkeydown="handleKey(event,'home')" oninput="autoResize(this)"></textarea>
+    <!-- Property search with autocomplete -->
+    <div style="position:relative">
+      <!-- Selected pill -->
+      <div class="prop-pill" id="home-prop-pill">
+        <span class="prop-pill-text" id="home-prop-pill-text"></span>
+        <button class="prop-pill-clear" onclick="clearProperty('home')">×</button>
       </div>
+      <!-- Search row -->
+      <div class="property-row" id="home-prop-row">
+        <span class="property-icon">📍</span>
+        <span class="property-label">PROPERTY</span>
+        <div class="property-divider"></div>
+        <input type="text" class="property-input" id="home-prop-input" placeholder="Search by address, building, or unit..." autocomplete="off" oninput="propSearch(this,'home')" onfocus="propSearch(this,'home')" onkeydown="propKeydown(event,'home')">
+        <button class="property-clear" id="home-prop-clear" onclick="clearPropInput('home')">×</button>
+      </div>
+      <div class="prop-dropdown" id="home-prop-dropdown"></div>
+    </div>
+
+    <!-- Ask bar -->
+    <div class="ask-row">
+      <textarea class="ask-input" id="home-ask" placeholder="e.g. Guest says the door code isn't working..." rows="1" onkeydown="handleKey(event,'home')" oninput="autoResize(this)"></textarea>
       <button class="send-btn" id="home-send" onclick="send('home')">
         <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
@@ -128,21 +154,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
   </div>
 </div>
 
-<!-- CHAT PAGE — messages above, input fixed at bottom -->
+<!-- CHAT PAGE -->
 <div id="chat-page">
   <div class="chat-msgs" id="chat-msgs"></div>
   <div class="chat-bottom">
     <div class="chat-bottom-inner">
-      <div class="property-row">
-        <span class="property-icon">📍</span>
-        <span class="property-label">PROPERTY</span>
-        <div class="property-divider"></div>
-        <input type="text" class="property-input" id="chat-property" placeholder="Address, building, or unit (optional)">
+      <!-- Property row in chat -->
+      <div style="position:relative">
+        <div class="prop-pill" id="chat-prop-pill">
+          <span class="prop-pill-text" id="chat-prop-pill-text"></span>
+          <button class="prop-pill-clear" onclick="clearProperty('chat')">×</button>
+        </div>
+        <div class="property-row" id="chat-prop-row">
+          <span class="property-icon">📍</span>
+          <span class="property-label">PROPERTY</span>
+          <div class="property-divider"></div>
+          <input type="text" class="property-input" id="chat-prop-input" placeholder="Search by address, building, or unit..." autocomplete="off" oninput="propSearch(this,'chat')" onfocus="propSearch(this,'chat')" onkeydown="propKeydown(event,'chat')">
+          <button class="property-clear" id="chat-prop-clear" onclick="clearPropInput('chat')">×</button>
+        </div>
+        <div class="prop-dropdown" id="chat-prop-dropdown"></div>
       </div>
       <div class="ask-row">
-        <div class="ask-wrap">
-          <textarea class="ask-input" id="chat-ask" placeholder="Ask a follow-up..." rows="1" onkeydown="handleKey(event,'chat')" oninput="autoResize(this)"></textarea>
-        </div>
+        <textarea class="ask-input" id="chat-ask" placeholder="Ask a follow-up..." rows="1" onkeydown="handleKey(event,'chat')" oninput="autoResize(this)"></textarea>
         <button class="send-btn" id="chat-send" onclick="send('chat')">
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
@@ -152,126 +185,273 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 </div>
 
 <script>
-const NOTION_TOKEN='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';
-const KB_DB_ID='7b324a42-e2bd-445f-8423-e93dccf64592';
-const GE_DB_ID='32dc074e-62db-81f4-86c1-000b8d740f68';
+const NOTION_TOKEN = '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';
+const ANTHROPIC_KEY = 'YOUR_ANTHROPIC_API_KEY';
+const KB_DB_ID = '7b324a42-e2bd-445f-8423-e93dccf64592';
+const GE_DB_ID = '32dc074e-62db-81f4-86c1-000b8d740f68';
 
-async function notionPost(ep,body){
-  const r=await fetch('https://api.notion.com/v1/'+ep,{method:'POST',headers:{'Authorization':'Bearer '+NOTION_TOKEN,'Notion-Version':'2022-06-28','Content-Type':'application/json'},body:JSON.stringify(body)});
+// Selected property state per context
+const selectedProp = { home: null, chat: null };
+let propSearchTimer = null;
+let propDropdownIndex = { home: -1, chat: -1 };
+
+async function notionPost(ep, body) {
+  const r = await fetch('https://api.notion.com/v1/' + ep, {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + NOTION_TOKEN, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
   return r.json();
 }
 
-async function getKB(){
-  const d=await notionPost('databases/'+KB_DB_ID+'/query',{filter:{property:'Verification status',status:{equals:'Verified'}},page_size:60});
-  return(d.results||[]).map(p=>{
-    const g=k=>p.properties[k]?.rich_text?.[0]?.plain_text||p.properties[k]?.title?.[0]?.plain_text||'';
-    return{title:g('Note'),symptom:g('Symptom / Question'),resolution:g('Resolution / Answer'),category:p.properties['Category']?.select?.name||'',url:p.url};
-  }).filter(e=>e.resolution);
+// Property autocomplete search
+async function propSearch(input, ctx) {
+  const q = input.value.trim();
+  const dd = document.getElementById(ctx + '-prop-dropdown');
+  const clearBtn = document.getElementById(ctx + '-prop-clear');
+  clearBtn.className = 'property-clear' + (q ? ' visible' : '');
+
+  if (!q || q.length < 2) { dd.className = 'prop-dropdown'; return; }
+
+  dd.className = 'prop-dropdown open';
+  dd.innerHTML = '<div class="prop-loading">Searching...</div>';
+
+  clearTimeout(propSearchTimer);
+  propSearchTimer = setTimeout(async () => {
+    try {
+      const d = await notionPost('databases/' + GE_DB_ID + '/query', {
+        filter: { property: 'Address', rich_text: { contains: q } },
+        page_size: 8
+      });
+      const results = (d.results || []).map(p => {
+        const g = k => p.properties[k]?.rich_text?.[0]?.plain_text || p.properties[k]?.title?.[0]?.plain_text || '';
+        return {
+          id: p.id, url: p.url,
+          address: g('Address'), unit: g('Unit Number'),
+          wifi: g('Wifi Network'), wifiPass: g('Wifi Password'),
+          checkin: g('Check-in process (how to access the unit)') || g('Check-In'),
+          parking: g('Parking (Yes/ No)\nStall #'), parkingProcess: g('Parking Process'),
+          intercom: g('Intercom Dial Code and Business hours'),
+          buildingMgmt: g('Building Management Company'),
+          garbage: g('Garbage & Recycling Bins (Calgary Waste URL)'),
+          modem: g('Internet Modem Location'), isp: g('Provider')
+        };
+      }).filter(p => p.address);
+
+      if (!results.length) {
+        dd.innerHTML = '<div class="prop-none">No properties found for "' + q + '"</div>';
+        return;
+      }
+
+      dd.innerHTML = '';
+      propDropdownIndex[ctx] = -1;
+      results.forEach((p, i) => {
+        const opt = document.createElement('div');
+        opt.className = 'prop-opt';
+        opt.dataset.index = i;
+        const label = p.unit ? p.address + ' — Unit ' + p.unit : p.address;
+        const sub = [p.wifi ? 'WiFi: ' + p.wifi : '', p.intercom ? 'Intercom: ' + p.intercom : ''].filter(Boolean).join(' · ');
+        opt.innerHTML = '<div class="prop-opt-name">' + label + '</div>' + (sub ? '<div class="prop-opt-sub">' + sub + '</div>' : '');
+        opt.onclick = () => selectProperty(p, ctx);
+        dd.appendChild(opt);
+      });
+      // store results for keyboard nav
+      dd._results = results;
+    } catch(e) {
+      dd.innerHTML = '<div class="prop-none">Search failed — check connection</div>';
+    }
+  }, 300);
 }
 
-async function getProperty(addr){
-  if(!addr.trim())return null;
-  const d=await notionPost('databases/'+GE_DB_ID+'/query',{filter:{property:'Address',rich_text:{contains:addr.trim()}},page_size:3});
-  if(!d.results?.length)return null;
-  const p=d.results[0];
-  const g=k=>{const pr=p.properties[k];if(!pr)return'';return pr.rich_text?.[0]?.plain_text||pr.title?.[0]?.plain_text||pr.select?.name||pr.phone_number||pr.email||pr.url||'';};
-  return{address:g('Address'),unit:g('Unit Number'),wifi:g('Wifi Network'),wifiPass:g('Wifi Password'),checkin:g('Check-in process (how to access the unit)')||g('Check-In'),parking:g('Parking (Yes/ No)\nStall #'),parkingProcess:g('Parking Process'),intercom:g('Intercom Dial Code and Business hours'),buildingMgmt:g('Building Management Company'),garbage:g('Garbage & Recycling Bins (Calgary Waste URL)'),modem:g('Internet Modem Location'),isp:g('Provider'),url:p.url};
-}
-
-async function askClaude(q,kb,prop){
-  let sys='You are the Your Key Rental Management internal AI assistant for Calgary STR operations. Answer concisely and actionably.\n\nFORMAT: Direct answer, numbered steps if procedural, end with "Confidence: [Confirmed / Likely / Check with PM]".\n\nESCALATE TO PM: refunds, compensation, costs over $200, owner contact, safety emergencies (911 first).';
-  if(kb.length)sys+='\n\n## KNOWLEDGE BASE\n'+kb.map(e=>'### '+e.title+'\nQ: '+e.symptom+'\nA: '+e.resolution).join('\n\n');
-  if(prop){
-    sys+='\n\n## PROPERTY: '+prop.address+(prop.unit?' Unit '+prop.unit:'');
-    if(prop.wifi)sys+='\nWiFi: '+prop.wifi+' / '+prop.wifiPass;
-    if(prop.checkin)sys+='\nCheck-in: '+prop.checkin;
-    if(prop.intercom)sys+='\nIntercom: '+prop.intercom;
-    if(prop.parking)sys+='\nParking: '+prop.parking;
-    if(prop.parkingProcess)sys+='\nParking process: '+prop.parkingProcess;
-    if(prop.buildingMgmt)sys+='\nBuilding mgmt: '+prop.buildingMgmt;
-    if(prop.modem)sys+='\nModem: '+prop.modem;
-    if(prop.garbage)sys+='\nGarbage: '+prop.garbage;
+function selectProperty(prop, ctx) {
+  selectedProp[ctx] = prop;
+  const label = prop.unit ? prop.address + ' — Unit ' + prop.unit : prop.address;
+  document.getElementById(ctx + '-prop-pill-text').textContent = '📍 ' + label;
+  document.getElementById(ctx + '-prop-pill').className = 'prop-pill visible';
+  document.getElementById(ctx + '-prop-row').style.display = 'none';
+  document.getElementById(ctx + '-prop-dropdown').className = 'prop-dropdown';
+  document.getElementById(ctx + '-prop-input').value = '';
+  // sync to chat if selecting from home
+  if (ctx === 'home') {
+    selectedProp['chat'] = prop;
+    document.getElementById('chat-prop-pill-text').textContent = '📍 ' + label;
+    document.getElementById('chat-prop-pill').className = 'prop-pill visible';
+    document.getElementById('chat-prop-row').style.display = 'none';
   }
-  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:q}]})});
-  const d=await r.json();
-  return d.content?.[0]?.text||'Sorry, something went wrong.';
+  document.getElementById(ctx + '-ask').focus();
 }
 
-function switchToChat(){
-  document.getElementById('home-page').style.display='none';
-  const cp=document.getElementById('chat-page');
-  cp.style.display='flex';
-  // sync property field
-  document.getElementById('chat-property').value=document.getElementById('home-property').value;
+function clearProperty(ctx) {
+  selectedProp[ctx] = null;
+  document.getElementById(ctx + '-prop-pill').className = 'prop-pill';
+  document.getElementById(ctx + '-prop-row').style.display = 'flex';
+  document.getElementById(ctx + '-prop-input').value = '';
+  document.getElementById(ctx + '-prop-clear').className = 'property-clear';
+  if (ctx === 'home') { selectedProp['chat'] = null; clearProperty('chat'); }
 }
 
-function addMsg(role,content,propLabel,sources){
-  const msgs=document.getElementById('chat-msgs');
-  const msg=document.createElement('div');
-  msg.className='msg '+role;
-  if(role==='user'){
-    const b=document.createElement('div');b.className='bubble';
-    if(propLabel){const t=document.createElement('div');t.className='prop-tag';t.textContent='📍 '+propLabel;b.appendChild(t);}
+function clearPropInput(ctx) {
+  document.getElementById(ctx + '-prop-input').value = '';
+  document.getElementById(ctx + '-prop-dropdown').className = 'prop-dropdown';
+  document.getElementById(ctx + '-prop-clear').className = 'property-clear';
+}
+
+function propKeydown(e, ctx) {
+  const dd = document.getElementById(ctx + '-prop-dropdown');
+  const opts = dd.querySelectorAll('.prop-opt');
+  if (!dd.classList.contains('open') || !opts.length) return;
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    propDropdownIndex[ctx] = Math.min(propDropdownIndex[ctx] + 1, opts.length - 1);
+    opts.forEach((o, i) => o.className = 'prop-opt' + (i === propDropdownIndex[ctx] ? ' active' : ''));
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    propDropdownIndex[ctx] = Math.max(propDropdownIndex[ctx] - 1, 0);
+    opts.forEach((o, i) => o.className = 'prop-opt' + (i === propDropdownIndex[ctx] ? ' active' : ''));
+  } else if (e.key === 'Enter') {
+    e.preventDefault();
+    if (propDropdownIndex[ctx] >= 0 && dd._results) selectProperty(dd._results[propDropdownIndex[ctx]], ctx);
+  } else if (e.key === 'Escape') {
+    dd.className = 'prop-dropdown';
+  }
+}
+
+// Close dropdown on outside click
+document.addEventListener('click', e => {
+  ['home', 'chat'].forEach(ctx => {
+    const dd = document.getElementById(ctx + '-prop-dropdown');
+    const row = document.getElementById(ctx + '-prop-row');
+    if (dd && row && !row.contains(e.target) && !dd.contains(e.target)) {
+      dd.className = 'prop-dropdown';
+    }
+  });
+});
+
+async function getKB() {
+  const d = await notionPost('databases/' + KB_DB_ID + '/query', {
+    filter: { property: 'Verification status', status: { equals: 'Verified' } },
+    page_size: 60
+  });
+  return (d.results || []).map(p => {
+    const g = k => p.properties[k]?.rich_text?.[0]?.plain_text || p.properties[k]?.title?.[0]?.plain_text || '';
+    return { title: g('Note'), symptom: g('Symptom / Question'), resolution: g('Resolution / Answer'), category: p.properties['Category']?.select?.name || '', url: p.url };
+  }).filter(e => e.resolution);
+}
+
+async function askClaude(q, kb, prop) {
+  let sys = 'You are the Your Key Rental Management internal AI assistant for Calgary STR operations. Answer concisely and actionably.\n\nFORMAT: Direct answer, numbered steps if procedural, end with "Confidence: [Confirmed / Likely / Check with PM]".\n\nESCALATE TO PM: refunds, compensation, costs over $200, owner contact, safety emergencies (911 first).';
+  if (kb.length) sys += '\n\n## KNOWLEDGE BASE\n' + kb.map(e => '### ' + e.title + '\nQ: ' + e.symptom + '\nA: ' + e.resolution).join('\n\n');
+  if (prop) {
+    sys += '\n\n## PROPERTY: ' + prop.address + (prop.unit ? ' Unit ' + prop.unit : '');
+    if (prop.wifi) sys += '\nWiFi: ' + prop.wifi + ' / ' + prop.wifiPass;
+    if (prop.checkin) sys += '\nCheck-in: ' + prop.checkin;
+    if (prop.intercom) sys += '\nIntercom: ' + prop.intercom;
+    if (prop.parking) sys += '\nParking: ' + prop.parking;
+    if (prop.parkingProcess) sys += '\nParking process: ' + prop.parkingProcess;
+    if (prop.buildingMgmt) sys += '\nBuilding mgmt: ' + prop.buildingMgmt;
+    if (prop.modem) sys += '\nModem: ' + prop.modem;
+    if (prop.garbage) sys += '\nGarbage: ' + prop.garbage;
+  }
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', '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': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: sys, messages: [{ role: 'user', content: q }] })
+  });
+  if (!r.ok) throw new Error('API ' + r.status);
+  const d = await r.json();
+  return d.content?.[0]?.text || 'No response.';
+}
+
+function switchToChat() {
+  document.getElementById('home-page').style.display = 'none';
+  const cp = document.getElementById('chat-page');
+  cp.style.display = 'flex';
+}
+
+function addMsg(role, content, propLabel, sources) {
+  const msgs = document.getElementById('chat-msgs');
+  const msg = document.createElement('div');
+  msg.className = 'msg ' + role;
+  if (role === 'user') {
+    const b = document.createElement('div'); b.className = 'bubble';
+    if (propLabel) { const t = document.createElement('div'); t.className = 'prop-tag'; t.textContent = '📍 ' + propLabel; b.appendChild(t); }
     b.appendChild(document.createTextNode(content));
     msg.appendChild(b);
-  }else if(role==='thinking'){
-    const b=document.createElement('div');b.className='bubble';b.id='thinking-bub';
-    const d=document.createElement('div');d.className='dots';d.innerHTML='<span></span><span></span><span></span>';
-    b.appendChild(d);msg.id='thinking-msg';msg.appendChild(b);
-  }else{
-    const b=document.createElement('div');b.className='bubble';
-    const a=document.createElement('div');a.className='ai-answer';a.innerHTML=fmt(content);b.appendChild(a);
-    const cm=content.match(/Confidence:\s*(Confirmed|Likely|Check with PM)/i);
-    if(cm){const c=document.createElement('div');const lv=cm[1].toLowerCase().replace(/ /g,'-');c.className='conf '+(lv==='confirmed'?'confirmed':lv==='likely'?'likely':'check');c.textContent=(lv==='confirmed'?'✓ ':lv==='likely'?'~ ':'⚠ ')+cm[1];b.appendChild(c);}
-    if(sources?.length){const s=document.createElement('div');s.className='sources';const l=document.createElement('div');l.className='sources-lbl';l.textContent='SOURCES';s.appendChild(l);sources.forEach(src=>{const a=document.createElement('a');a.className='source-a';a.href=src.url;a.target='_blank';a.textContent='↗ '+src.title;s.appendChild(a);});b.appendChild(s);}
+  } else if (role === 'thinking') {
+    const b = document.createElement('div'); b.className = 'bubble'; b.id = 'thinking-bub';
+    const d = document.createElement('div'); d.className = 'dots'; d.innerHTML = '<span></span><span></span><span></span>';
+    b.appendChild(d); msg.id = 'thinking-msg'; msg.appendChild(b);
+  } else {
+    const b = document.createElement('div'); b.className = 'bubble';
+    const a = document.createElement('div'); a.className = 'ai-answer'; a.innerHTML = fmt(content); b.appendChild(a);
+    const cm = content.match(/Confidence:\s*(Confirmed|Likely|Check with PM)/i);
+    if (cm) {
+      const c = document.createElement('div');
+      const lv = cm[1].toLowerCase().replace(/ /g, '-');
+      c.className = 'conf ' + (lv === 'confirmed' ? 'confirmed' : lv === 'likely' ? 'likely' : 'check');
+      c.textContent = (lv === 'confirmed' ? '✓ ' : lv === 'likely' ? '~ ' : '⚠ ') + cm[1];
+      b.appendChild(c);
+    }
+    if (sources?.length) {
+      const s = document.createElement('div'); s.className = 'sources';
+      const l = document.createElement('div'); l.className = 'sources-lbl'; l.textContent = 'SOURCES'; s.appendChild(l);
+      sources.forEach(src => { const a = document.createElement('a'); a.className = 'source-a'; a.href = src.url; a.target = '_blank'; a.textContent = '↗ ' + src.title; s.appendChild(a); });
+      b.appendChild(s);
+    }
     msg.appendChild(b);
   }
   msgs.appendChild(msg);
-  msgs.scrollTop=msgs.scrollHeight;
+  msgs.scrollTop = msgs.scrollHeight;
 }
 
-function fmt(text){
-  text=text.replace(/\nConfidence:\s*.+$/im,'');
-  text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
-  const lines=text.split('\n');let inList=false,res='';
-  lines.forEach(l=>{const n=l.match(/^(\d+)\.\s/);if(n){if(!inList){res+='<ol>';inList=true;}res+='<li>'+l.replace(/^\d+\.\s/,'')+'</li>';}else{if(inList){res+='</ol>';inList=false;}if(l.trim())res+='<p>'+l+'</p>';}});
-  if(inList)res+='</ol>';
-  return res||'<p>'+text+'</p>';
+function fmt(text) {
+  text = text.replace(/\nConfidence:\s*.+$/im, '');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  const lines = text.split('\n'); let inList = false, res = '';
+  lines.forEach(l => {
+    const n = l.match(/^(\d+)\.\s/);
+    if (n) { if (!inList) { res += '<ol>'; inList = true; } res += '<li>' + l.replace(/^\d+\.\s/, '') + '</li>'; }
+    else { if (inList) { res += '</ol>'; inList = false; } if (l.trim()) res += '<p>' + l + '</p>'; }
+  });
+  if (inList) res += '</ol>';
+  return res || '<p>' + text + '</p>';
 }
 
-async function send(ctx){
-  const askEl=document.getElementById(ctx+'-ask');
-  const propEl=document.getElementById(ctx+'-property');
-  const btn=document.getElementById(ctx+'-send');
-  const q=askEl.value.trim();
-  const addr=propEl.value.trim();
-  if(!q)return;
-  askEl.value='';autoResize(askEl);btn.disabled=true;
-  if(ctx==='home')switchToChat();
-  addMsg('user',q,addr||null,null);
-  addMsg('thinking','',null,null);
-  try{
-    const[kb,prop]=await Promise.all([getKB(),addr?getProperty(addr):Promise.resolve(null)]);
-    const qL=q.toLowerCase();
-    const rel=kb.filter(e=>{const c=(e.title+' '+e.symptom+' '+e.category).toLowerCase();return qL.split(/\s+/).filter(w=>w.length>3).some(k=>c.includes(k));}).slice(0,5);
-    const ctx2=rel.length?rel:kb.slice(0,6);
-    const ans=await askClaude(q,ctx2,prop);
+async function send(ctx) {
+  const askEl = document.getElementById(ctx + '-ask');
+  const btn = document.getElementById(ctx + '-send');
+  const q = askEl.value.trim();
+  const prop = selectedProp[ctx];
+  if (!q) return;
+  askEl.value = ''; autoResize(askEl); btn.disabled = true;
+  if (ctx === 'home') switchToChat();
+  const propLabel = prop ? (prop.unit ? prop.address + ' — Unit ' + prop.unit : prop.address) : null;
+  addMsg('user', q, propLabel, null);
+  addMsg('thinking', '', null, null);
+  try {
+    const kb = await getKB();
+    const qL = q.toLowerCase();
+    const rel = kb.filter(e => {
+      const c = (e.title + ' ' + e.symptom + ' ' + e.category).toLowerCase();
+      return qL.split(/\s+/).filter(w => w.length > 3).some(k => c.includes(k));
+    }).slice(0, 5);
+    const ctx2 = rel.length ? rel : kb.slice(0, 6);
+    const ans = await askClaude(q, ctx2, prop);
     document.getElementById('thinking-msg')?.remove();
-    const srcs=[];
-    if(prop)srcs.push({title:prop.address+(prop.unit?' Unit '+prop.unit:''),url:prop.url});
-    rel.slice(0,2).forEach(e=>srcs.push({title:e.title,url:e.url}));
-    addMsg('ai',ans,null,srcs);
-  }catch(e){
+    const srcs = [];
+    if (prop) srcs.push({ title: prop.address + (prop.unit ? ' Unit ' + prop.unit : ''), url: prop.url });
+    rel.slice(0, 2).forEach(e => srcs.push({ title: e.title, url: e.url }));
+    addMsg('ai', ans, null, srcs);
+  } catch (e) {
     document.getElementById('thinking-msg')?.remove();
-    addMsg('ai','Something went wrong — check your connection.\n\nConfidence: Check with PM',null,null);
+    addMsg('ai', 'Something went wrong — ' + e.message + '\n\nConfidence: Check with PM', null, null);
   }
-  btn.disabled=false;
-  // focus chat ask for follow-up
+  btn.disabled = false;
   document.getElementById('chat-ask')?.focus();
 }
 
-function handleKey(e,ctx){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(ctx);}}
-function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,140)+'px';}
+function handleKey(e, ctx) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(ctx); } }
+function autoResize(el) { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, 140) + 'px'; }
 </script>
 </body>
 </html>
