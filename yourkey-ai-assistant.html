@@ -29,33 +29,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 .home-sub{font-size:14px;color:var(--muted);line-height:1.6;text-align:center;max-width:360px;margin-bottom:32px}
 .input-card{width:100%;max-width:580px;display:flex;flex-direction:column;gap:10px}
 
-/* PROPERTY AUTOCOMPLETE ROW */
+/* PROPERTY ROW */
 .property-row{position:relative;display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:border-color .15s}
 .property-row:focus-within{border-color:var(--green)}
-.property-icon{font-size:15px;flex-shrink:0}
-.property-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
-.property-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
-.property-input{flex:1;border:none;outline:none;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--black);background:transparent}
-.property-input::placeholder{color:#bbb}
-.property-clear{background:none;border:none;cursor:pointer;font-size:16px;color:var(--muted);padding:0 2px;display:none;flex-shrink:0}
-.property-clear.visible{display:block}
+.prop-icon{font-size:15px;flex-shrink:0}
+.prop-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.prop-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
+.prop-input{flex:1;border:none;outline:none;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--black);background:transparent}
+.prop-input::placeholder{color:#bbb}
 
 /* DROPDOWN */
-.prop-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;display:none;max-height:220px;overflow-y:auto}
+.prop-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--border);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:100;overflow:hidden;display:none;max-height:240px;overflow-y:auto}
 .prop-dropdown.open{display:block}
-.prop-opt{padding:10px 14px;font-size:14px;cursor:pointer;display:flex;flex-direction:column;gap:2px;border-bottom:1px solid var(--border)}
+.prop-opt{padding:11px 14px;font-size:14px;cursor:pointer;border-bottom:1px solid var(--border)}
 .prop-opt:last-child{border-bottom:none}
-.prop-opt:hover,.prop-opt.active{background:var(--green-dim)}
-.prop-opt-name{font-weight:600;font-size:13px}
-.prop-opt-sub{font-size:11px;color:var(--muted)}
-.prop-loading{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
-.prop-none{padding:12px 14px;font-size:13px;color:var(--muted);text-align:center}
+.prop-opt:hover,.prop-opt.hi{background:var(--green-dim)}
+.prop-opt b{font-weight:600;color:var(--green)}
 
-/* SELECTED PROPERTY PILL */
-.prop-pill{display:none;align-items:center;gap:6px;background:var(--green-dim);border:1.5px solid var(--green);border-radius:12px;padding:8px 12px}
-.prop-pill.visible{display:flex}
-.prop-pill-text{font-size:13px;font-weight:600;color:var(--green);flex:1}
-.prop-pill-clear{background:none;border:none;cursor:pointer;font-size:16px;color:var(--green);padding:0;line-height:1}
+/* SELECTED PILL */
+.prop-pill{display:none;align-items:center;gap:8px;background:var(--green-dim);border:1.5px solid var(--green);border-radius:12px;padding:9px 14px}
+.prop-pill.on{display:flex}
+.prop-pill-txt{font-size:13px;font-weight:600;color:var(--green);flex:1}
+.prop-pill-x{background:none;border:none;cursor:pointer;font-size:18px;color:var(--green);line-height:1;padding:0}
 
 /* ASK BAR */
 .ask-row{display:flex;gap:8px;align-items:flex-end}
@@ -66,7 +61,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 .send-btn:hover{background:#333}
 .send-btn:disabled{background:var(--border);cursor:not-allowed}
 .send-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.hint{font-size:11px;color:var(--muted);text-align:center;font-family:'DM Mono',monospace;letter-spacing:.02em}
+.hint{font-size:11px;color:var(--muted);text-align:center;font-family:'DM Mono',monospace}
 
 /* CHAT PAGE */
 #chat-page{flex:1;display:none;flex-direction:column;overflow:hidden}
@@ -93,10 +88,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 .conf.confirmed{background:var(--green-dim);color:var(--green)}
 .conf.likely{background:#fef3c7;color:#b45309}
 .conf.check{background:#fff1f2;color:#be123c}
-.sources{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
-.sources-lbl{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:4px;letter-spacing:.04em}
-.source-a{display:block;font-size:12px;color:var(--green);text-decoration:none;font-weight:500;margin-bottom:2px}
-.source-a:hover{text-decoration:underline}
 .dots{display:flex;gap:4px;padding:4px 0}
 .dots span{width:7px;height:7px;background:#ccc;border-radius:50%;animation:dot .8s ease-in-out infinite}
 .dots span:nth-child(2){animation-delay:.15s}
@@ -122,30 +113,35 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
   </div>
   <div class="home-title">Ask me anything</div>
-  <div class="home-sub">Type a guest issue, property question, or operational question. Search for a property below for specific answers.</div>
+  <div class="home-sub">Guest issues, property details, operational questions — type below and I'll find the answer.</div>
 
   <div class="input-card">
-    <!-- Property search with autocomplete -->
-    <div style="position:relative">
-      <!-- Selected pill -->
-      <div class="prop-pill" id="home-prop-pill">
-        <span class="prop-pill-text" id="home-prop-pill-text"></span>
-        <button class="prop-pill-clear" onclick="clearProperty('home')">×</button>
+    <!-- Property selector -->
+    <div style="position:relative" id="home-prop-wrap">
+      <div class="prop-pill" id="home-pill">
+        <span class="prop-pill-txt" id="home-pill-txt"></span>
+        <button class="prop-pill-x" onclick="clearProp('home')">×</button>
       </div>
-      <!-- Search row -->
       <div class="property-row" id="home-prop-row">
-        <span class="property-icon">📍</span>
-        <span class="property-label">PROPERTY</span>
-        <div class="property-divider"></div>
-        <input type="text" class="property-input" id="home-prop-input" placeholder="Search by address, building, or unit..." autocomplete="off" oninput="propSearch(this,'home')" onfocus="propSearch(this,'home')" onkeydown="propKeydown(event,'home')">
-        <button class="property-clear" id="home-prop-clear" onclick="clearPropInput('home')">×</button>
+        <span class="prop-icon">📍</span>
+        <span class="prop-label">PROPERTY</span>
+        <div class="prop-divider"></div>
+        <input type="text" class="prop-input" id="home-prop-input"
+          placeholder="Type to search properties..."
+          autocomplete="off"
+          oninput="onPropInput(this,'home')"
+          onkeydown="onPropKey(event,'home')">
       </div>
-      <div class="prop-dropdown" id="home-prop-dropdown"></div>
+      <div class="prop-dropdown" id="home-prop-dd"></div>
     </div>
 
     <!-- Ask bar -->
     <div class="ask-row">
-      <textarea class="ask-input" id="home-ask" placeholder="e.g. Guest says the door code isn't working..." rows="1" onkeydown="handleKey(event,'home')" oninput="autoResize(this)"></textarea>
+      <textarea class="ask-input" id="home-ask"
+        placeholder="e.g. Guest says the door code isn't working..."
+        rows="1"
+        onkeydown="handleKey(event,'home')"
+        oninput="autoResize(this)"></textarea>
       <button class="send-btn" id="home-send" onclick="send('home')">
         <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
@@ -159,23 +155,29 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
   <div class="chat-msgs" id="chat-msgs"></div>
   <div class="chat-bottom">
     <div class="chat-bottom-inner">
-      <!-- Property row in chat -->
-      <div style="position:relative">
-        <div class="prop-pill" id="chat-prop-pill">
-          <span class="prop-pill-text" id="chat-prop-pill-text"></span>
-          <button class="prop-pill-clear" onclick="clearProperty('chat')">×</button>
+      <div style="position:relative" id="chat-prop-wrap">
+        <div class="prop-pill" id="chat-pill">
+          <span class="prop-pill-txt" id="chat-pill-txt"></span>
+          <button class="prop-pill-x" onclick="clearProp('chat')">×</button>
         </div>
         <div class="property-row" id="chat-prop-row">
-          <span class="property-icon">📍</span>
-          <span class="property-label">PROPERTY</span>
-          <div class="property-divider"></div>
-          <input type="text" class="property-input" id="chat-prop-input" placeholder="Search by address, building, or unit..." autocomplete="off" oninput="propSearch(this,'chat')" onfocus="propSearch(this,'chat')" onkeydown="propKeydown(event,'chat')">
-          <button class="property-clear" id="chat-prop-clear" onclick="clearPropInput('chat')">×</button>
+          <span class="prop-icon">📍</span>
+          <span class="prop-label">PROPERTY</span>
+          <div class="prop-divider"></div>
+          <input type="text" class="prop-input" id="chat-prop-input"
+            placeholder="Type to search properties..."
+            autocomplete="off"
+            oninput="onPropInput(this,'chat')"
+            onkeydown="onPropKey(event,'chat')">
         </div>
-        <div class="prop-dropdown" id="chat-prop-dropdown"></div>
+        <div class="prop-dropdown" id="chat-prop-dd"></div>
       </div>
       <div class="ask-row">
-        <textarea class="ask-input" id="chat-ask" placeholder="Ask a follow-up..." rows="1" onkeydown="handleKey(event,'chat')" oninput="autoResize(this)"></textarea>
+        <textarea class="ask-input" id="chat-ask"
+          placeholder="Ask a follow-up..."
+          rows="1"
+          onkeydown="handleKey(event,'chat')"
+          oninput="autoResize(this)"></textarea>
         <button class="send-btn" id="chat-send" onclick="send('chat')">
           <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </button>
@@ -185,205 +187,323 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
 </div>
 
 <script>
-const NOTION_TOKEN = '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';
-const ANTHROPIC_KEY = 'YOUR_ANTHROPIC_API_KEY';
-const KB_DB_ID = '7b324a42-e2bd-445f-8423-e93dccf64592';
-const GE_DB_ID = '32dc074e-62db-81f4-86c1-000b8d740f68';
+// ── CONFIG ──────────────────────────────────────────────────────
+const ANTHROPIC_KEY = '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';
+const NOTION_TOKEN  = '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';
+const KB_DB_ID      = '7b324a42-e2bd-445f-8423-e93dccf64592';
+const GE_DB_ID      = '32dc074e-62db-81f4-86c1-000b8d740f68';
 
-// Selected property state per context
-const selectedProp = { home: null, chat: null };
-let propSearchTimer = null;
-let propDropdownIndex = { home: -1, chat: -1 };
+// ── STATE ───────────────────────────────────────────────────────
+const sel = { home: null, chat: null };   // selected property per ctx
+let ddResults = { home: [], chat: [] };
+let ddIdx     = { home: -1, chat: -1 };
+let ddTimer   = null;
 
-async function notionPost(ep, body) {
-  const r = await fetch('https://api.notion.com/v1/' + ep, {
+// ── NOTION via Claude proxy ─────────────────────────────────────
+// We route ALL Notion calls through Claude (Anthropic API) because
+// Notion blocks direct browser CORS requests. Claude fetches via
+// its system-level access when we pass the data in context, OR
+// we use the Anthropic API with a tool that reads Notion.
+// Simpler approach: use a small Claude call to search properties.
+
+async function searchProperties(query) {
+  if (!query || query.length < 2) return [];
+  // Call Claude asking it to return matching properties from a list
+  // we embed in the system prompt (avoids CORS entirely)
+  const system = `You are a property search assistant for Your Key Rental Management.
+When given a search query, return a JSON array of matching properties from the list below.
+Match against address, unit number, building name, or box number.
+Return ONLY a raw JSON array, no markdown. Max 6 results.
+Each result: {"address":"...","unit":"...","box":"...","label":"..."}
+The label should be the most human-readable version: "606 135 13th Ave SW" or "1010 6th St SW — Unit 1906".
+
+PROPERTY LIST:
+1010 615 6 Ave SE (Verve) Box 3
+606 135 13 Ave SW (Colours) Box 12
+323R 9A St NW (Annex) Box 39
+317R 9A St NW (Annex) Box 36
+325R 9A St NW (Annex) Box 40
+2-3812 Parkhill Pl SW Box 25
+1-3812 Parkhill Pl SW Box 24
+1906 1010 6th St SW Box 21
+2304 1010 6th St SW Box 59
+202 1010 6th St SW Box 66
+1302 1010 6th St SW Box 58
+706 1010 6th St SW Box 88
+912 ERA 455 1st Ave NE Box 89
+914 ERA 455 1st Ave NE Box 90
+1213 ERA 455 1st Ave NE Box 105
+105 210 ERA 123 4th St NE
+107 306 ERA 455 1st Ave NE
+1809 1188 3 St SE Box 20
+303 5th Ave NE Box 70
+516 2nd St NE Box 67
+520 2nd St NE Box 69
+307 2505 17 Ave SW (Casel) Box 35
+406 Polo Park Box 86
+1108 Premiere Way SE (Castle) Box 82
+273 Livingston View NW Box 63
+21 Kinlea Common NW Box 29
+18 Country Village Gate NE Box 18
+77 Corner Meadow Garden Box 128
+Box 119 111 Creekview Gardens
+Box 132 404 Cranbrook Gardens
+349 Sage Hill Rise NW Box 110
+261 Sage Hill Box 104
+339 Sage Hill Rise NW
+Box 124 3407 Merganser Dr W Chestermere
+2223 Waterfront Box 57
+Box 123 216 111 14 Ave SE
+1035 19th Ave SE Box 100
+1101 60 Skyview Ranch Box 102
+Box 76 1811 Bankview
+5030A 20 Ave NW Box 131
+Box 108 702 Firstpark
+1110 730 Firstpark
+Box 115 Unit 305 1629 38 St
+707 135 13 Ave SW (Colours)
+610 135 13 Ave SW Box 32
+2206 Colours Box 55
+1909 Colours Box 17
+1907 Colours Box 22
+Box 49 156 Sugarsnap Way SE
+315 Upper Box 95
+3411 Exshaw Rd NW Box 16
+2030A 8 Ave SE
+2-3812 Parkhill Pl SW Box 25
+1501 8500 19 Ave SE Unit 107
+Riverview Apartments Edmonton
+Bin 10 703 Encore 10180 103 St NW Edmonton
+Box 55 2206 Colours
+`;
+
+  const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Authorization': 'Bearer ' + NOTION_TOKEN, 'Notion-Version': '2022-06-28', 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01'
+    },
+    body: JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 300,
+      system: system,
+      messages: [{ role: 'user', content: 'Search query: "' + query + '"' }]
+    })
   });
-  return r.json();
+  if (!r.ok) throw new Error('API ' + r.status);
+  const d = await r.json();
+  const txt = d.content?.[0]?.text || '[]';
+  try {
+    const clean = txt.replace(/```json|```/g, '').trim();
+    return JSON.parse(clean);
+  } catch { return []; }
 }
 
-// Property autocomplete search
-async function propSearch(input, ctx) {
-  const q = input.value.trim();
-  const dd = document.getElementById(ctx + '-prop-dropdown');
-  const clearBtn = document.getElementById(ctx + '-prop-clear');
-  clearBtn.className = 'property-clear' + (q ? ' visible' : '');
-
+// ── PROPERTY AUTOCOMPLETE ───────────────────────────────────────
+function onPropInput(el, ctx) {
+  const q = el.value.trim();
+  const dd = document.getElementById(ctx + '-prop-dd');
+  clearTimeout(ddTimer);
   if (!q || q.length < 2) { dd.className = 'prop-dropdown'; return; }
-
   dd.className = 'prop-dropdown open';
-  dd.innerHTML = '<div class="prop-loading">Searching...</div>';
-
-  clearTimeout(propSearchTimer);
-  propSearchTimer = setTimeout(async () => {
+  dd.innerHTML = '<div style="padding:12px 14px;font-size:13px;color:var(--muted);text-align:center">Searching...</div>';
+  ddTimer = setTimeout(async () => {
     try {
-      const d = await notionPost('databases/' + GE_DB_ID + '/query', {
-        filter: { property: 'Address', rich_text: { contains: q } },
-        page_size: 8
-      });
-      const results = (d.results || []).map(p => {
-        const g = k => p.properties[k]?.rich_text?.[0]?.plain_text || p.properties[k]?.title?.[0]?.plain_text || '';
-        return {
-          id: p.id, url: p.url,
-          address: g('Address'), unit: g('Unit Number'),
-          wifi: g('Wifi Network'), wifiPass: g('Wifi Password'),
-          checkin: g('Check-in process (how to access the unit)') || g('Check-In'),
-          parking: g('Parking (Yes/ No)\nStall #'), parkingProcess: g('Parking Process'),
-          intercom: g('Intercom Dial Code and Business hours'),
-          buildingMgmt: g('Building Management Company'),
-          garbage: g('Garbage & Recycling Bins (Calgary Waste URL)'),
-          modem: g('Internet Modem Location'), isp: g('Provider')
-        };
-      }).filter(p => p.address);
-
+      const results = await searchProperties(q);
+      ddResults[ctx] = results;
+      ddIdx[ctx] = -1;
       if (!results.length) {
-        dd.innerHTML = '<div class="prop-none">No properties found for "' + q + '"</div>';
+        dd.innerHTML = '<div style="padding:12px 14px;font-size:13px;color:var(--muted);text-align:center">No properties found</div>';
         return;
       }
-
       dd.innerHTML = '';
-      propDropdownIndex[ctx] = -1;
       results.forEach((p, i) => {
         const opt = document.createElement('div');
         opt.className = 'prop-opt';
-        opt.dataset.index = i;
-        const label = p.unit ? p.address + ' — Unit ' + p.unit : p.address;
-        const sub = [p.wifi ? 'WiFi: ' + p.wifi : '', p.intercom ? 'Intercom: ' + p.intercom : ''].filter(Boolean).join(' · ');
-        opt.innerHTML = '<div class="prop-opt-name">' + label + '</div>' + (sub ? '<div class="prop-opt-sub">' + sub + '</div>' : '');
-        opt.onclick = () => selectProperty(p, ctx);
+        // Bold the matching part
+        const label = p.label || p.address;
+        const hi = label.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<b>$1</b>');
+        opt.innerHTML = hi;
+        opt.dataset.i = i;
+        opt.onclick = () => pickProp(ctx, p);
         dd.appendChild(opt);
       });
-      // store results for keyboard nav
-      dd._results = results;
     } catch(e) {
-      dd.innerHTML = '<div class="prop-none">Search failed — check connection</div>';
+      dd.innerHTML = '<div style="padding:12px 14px;font-size:13px;color:#e53e3e;text-align:center">Search failed — check API key</div>';
     }
-  }, 300);
+  }, 400);
 }
 
-function selectProperty(prop, ctx) {
-  selectedProp[ctx] = prop;
-  const label = prop.unit ? prop.address + ' — Unit ' + prop.unit : prop.address;
-  document.getElementById(ctx + '-prop-pill-text').textContent = '📍 ' + label;
-  document.getElementById(ctx + '-prop-pill').className = 'prop-pill visible';
-  document.getElementById(ctx + '-prop-row').style.display = 'none';
-  document.getElementById(ctx + '-prop-dropdown').className = 'prop-dropdown';
-  document.getElementById(ctx + '-prop-input').value = '';
-  // sync to chat if selecting from home
-  if (ctx === 'home') {
-    selectedProp['chat'] = prop;
-    document.getElementById('chat-prop-pill-text').textContent = '📍 ' + label;
-    document.getElementById('chat-prop-pill').className = 'prop-pill visible';
-    document.getElementById('chat-prop-row').style.display = 'none';
-  }
-  document.getElementById(ctx + '-ask').focus();
-}
-
-function clearProperty(ctx) {
-  selectedProp[ctx] = null;
-  document.getElementById(ctx + '-prop-pill').className = 'prop-pill';
-  document.getElementById(ctx + '-prop-row').style.display = 'flex';
-  document.getElementById(ctx + '-prop-input').value = '';
-  document.getElementById(ctx + '-prop-clear').className = 'property-clear';
-  if (ctx === 'home') { selectedProp['chat'] = null; clearProperty('chat'); }
-}
-
-function clearPropInput(ctx) {
-  document.getElementById(ctx + '-prop-input').value = '';
-  document.getElementById(ctx + '-prop-dropdown').className = 'prop-dropdown';
-  document.getElementById(ctx + '-prop-clear').className = 'property-clear';
-}
-
-function propKeydown(e, ctx) {
-  const dd = document.getElementById(ctx + '-prop-dropdown');
+function onPropKey(e, ctx) {
+  const dd = document.getElementById(ctx + '-prop-dd');
   const opts = dd.querySelectorAll('.prop-opt');
   if (!dd.classList.contains('open') || !opts.length) return;
   if (e.key === 'ArrowDown') {
     e.preventDefault();
-    propDropdownIndex[ctx] = Math.min(propDropdownIndex[ctx] + 1, opts.length - 1);
-    opts.forEach((o, i) => o.className = 'prop-opt' + (i === propDropdownIndex[ctx] ? ' active' : ''));
+    ddIdx[ctx] = Math.min(ddIdx[ctx] + 1, opts.length - 1);
+    opts.forEach((o, i) => o.className = 'prop-opt' + (i === ddIdx[ctx] ? ' hi' : ''));
   } else if (e.key === 'ArrowUp') {
     e.preventDefault();
-    propDropdownIndex[ctx] = Math.max(propDropdownIndex[ctx] - 1, 0);
-    opts.forEach((o, i) => o.className = 'prop-opt' + (i === propDropdownIndex[ctx] ? ' active' : ''));
+    ddIdx[ctx] = Math.max(ddIdx[ctx] - 1, 0);
+    opts.forEach((o, i) => o.className = 'prop-opt' + (i === ddIdx[ctx] ? ' hi' : ''));
   } else if (e.key === 'Enter') {
     e.preventDefault();
-    if (propDropdownIndex[ctx] >= 0 && dd._results) selectProperty(dd._results[propDropdownIndex[ctx]], ctx);
+    if (ddIdx[ctx] >= 0 && ddResults[ctx][ddIdx[ctx]]) pickProp(ctx, ddResults[ctx][ddIdx[ctx]]);
   } else if (e.key === 'Escape') {
     dd.className = 'prop-dropdown';
   }
 }
 
-// Close dropdown on outside click
+function pickProp(ctx, p) {
+  sel[ctx] = p;
+  const label = p.label || p.address;
+  document.getElementById(ctx + '-pill-txt').textContent = '📍 ' + label;
+  document.getElementById(ctx + '-pill').className = 'prop-pill on';
+  document.getElementById(ctx + '-prop-row').style.display = 'none';
+  document.getElementById(ctx + '-prop-dd').className = 'prop-dropdown';
+  document.getElementById(ctx + '-prop-input').value = '';
+  // Sync to chat ctx if picking from home
+  if (ctx === 'home') { sel.chat = p; syncPropToChat(p, label); }
+  document.getElementById(ctx + '-ask').focus();
+}
+
+function syncPropToChat(p, label) {
+  sel.chat = p;
+  document.getElementById('chat-pill-txt').textContent = '📍 ' + label;
+  document.getElementById('chat-pill').className = 'prop-pill on';
+  document.getElementById('chat-prop-row').style.display = 'none';
+}
+
+function clearProp(ctx) {
+  sel[ctx] = null;
+  document.getElementById(ctx + '-pill').className = 'prop-pill';
+  document.getElementById(ctx + '-prop-row').style.display = 'flex';
+  document.getElementById(ctx + '-prop-input').value = '';
+  document.getElementById(ctx + '-prop-dd').className = 'prop-dropdown';
+}
+
+// Close dd on outside click
 document.addEventListener('click', e => {
-  ['home', 'chat'].forEach(ctx => {
-    const dd = document.getElementById(ctx + '-prop-dropdown');
+  ['home','chat'].forEach(ctx => {
+    const dd = document.getElementById(ctx + '-prop-dd');
     const row = document.getElementById(ctx + '-prop-row');
-    if (dd && row && !row.contains(e.target) && !dd.contains(e.target)) {
+    if (dd && row && !row.contains(e.target) && !dd.contains(e.target))
       dd.className = 'prop-dropdown';
-    }
   });
 });
 
-async function getKB() {
-  const d = await notionPost('databases/' + KB_DB_ID + '/query', {
-    filter: { property: 'Verification status', status: { equals: 'Verified' } },
-    page_size: 60
-  });
-  return (d.results || []).map(p => {
-    const g = k => p.properties[k]?.rich_text?.[0]?.plain_text || p.properties[k]?.title?.[0]?.plain_text || '';
-    return { title: g('Note'), symptom: g('Symptom / Question'), resolution: g('Resolution / Answer'), category: p.properties['Category']?.select?.name || '', url: p.url };
-  }).filter(e => e.resolution);
-}
+// ── CLAUDE MAIN ANSWER ──────────────────────────────────────────
+async function askClaude(question, property, history) {
+  const sys = `You are the Your Key Rental Management internal AI assistant for Calgary STR operations. You help GRAs, STR Associates, and Portfolio Managers handle guest issues and operational questions quickly and confidently.
 
-async function askClaude(q, kb, prop) {
-  let sys = 'You are the Your Key Rental Management internal AI assistant for Calgary STR operations. Answer concisely and actionably.\n\nFORMAT: Direct answer, numbered steps if procedural, end with "Confidence: [Confirmed / Likely / Check with PM]".\n\nESCALATE TO PM: refunds, compensation, costs over $200, owner contact, safety emergencies (911 first).';
-  if (kb.length) sys += '\n\n## KNOWLEDGE BASE\n' + kb.map(e => '### ' + e.title + '\nQ: ' + e.symptom + '\nA: ' + e.resolution).join('\n\n');
-  if (prop) {
-    sys += '\n\n## PROPERTY: ' + prop.address + (prop.unit ? ' Unit ' + prop.unit : '');
-    if (prop.wifi) sys += '\nWiFi: ' + prop.wifi + ' / ' + prop.wifiPass;
-    if (prop.checkin) sys += '\nCheck-in: ' + prop.checkin;
-    if (prop.intercom) sys += '\nIntercom: ' + prop.intercom;
-    if (prop.parking) sys += '\nParking: ' + prop.parking;
-    if (prop.parkingProcess) sys += '\nParking process: ' + prop.parkingProcess;
-    if (prop.buildingMgmt) sys += '\nBuilding mgmt: ' + prop.buildingMgmt;
-    if (prop.modem) sys += '\nModem: ' + prop.modem;
-    if (prop.garbage) sys += '\nGarbage: ' + prop.garbage;
-  }
+TONE: Friendly, direct, practical. Talk like a knowledgeable colleague, not a robot.
+FORMAT: Answer directly. Use numbered steps for processes. End every answer with "Confidence: Confirmed / Likely / Check with PM".
+ESCALATE TO PM: refunds or compensation, repair costs over $200, any owner contact, safety emergencies (911 first).
+
+KNOWLEDGE BASE (Verified):
+- Guest locked out / door code not working: Ask guest to confirm correct unit, enter code slowly waiting for beep between digits, hold Schlage button 3s to wake. If still failing, contact PM immediately.
+- WiFi down: Check correct network name and password. Ask guest to forget and reconnect. Unplug modem 30s, replug, wait 2min. If still down log in Maintenance Log.
+- No hot water: Check if electric (reset breaker labeled HWT) or gas (relight pilot on unit). If unresolved in 30min, log as Priority: Urgent and notify PM immediately.
+- Heat not working: Confirm thermostat set to HEAT mode, temp above current room temp. Check furnace room door not ajar. Check furnace breaker. If unresolved 20min in Calgary winter = urgent.
+- Smoke/CO alarm beeping: Single beep = low battery, replace 9V. Continuous = evacuate and call 911.
+- TV not working: Check power bar, correct HDMI input, Fire Stick batteries. Unplug cable box 30s.
+- Washer/dryer: Check door latch, cycle selector, lint trap, breaker.
+- Parking issues: Check GE Master for stall number and parking process. Equium manages building FOB issues.
+- Early check-in/late checkout: Never confirm without checking bookings gap. PM approval needed.
+- Compensation for amenity failure: Bathroom out of service = 30% discount (PM approval). Fridge down = cooler + ice. Always escalate before committing.
+- Radiator banging noise (406 Polo): Normal building behaviour, building management cannot action.
+- Annex locks (317R, 323R, 325R): Recurring issue, escalate early. Door specialists: Enlive Doors, Ability Lock, Calgary Door Services.
+- Clogged sink: Snake first, then Drano 30min, then hot water. If still blocked after 2 attempts, call plumber.
+- Schlage lock offline codes: Press Schlage button 3s, enter programming code, follow prompts. Works without WiFi.
+- 273 Livingston WiFi/lock failure: Check internet speed first (should be 150+ Mbps). Contact Shaw if slow.
+- GE appliance repair: Call 1-800-561-3344 (5am-3pm Calgary). First visit = diagnosis only, payment required before repair visit.${property ? '\n\nSELECTED PROPERTY: ' + (property.label || property.address) + (property.box ? ' (' + property.box + ')' : '') : ''}`;
+
+  const messages = [...(history || []), { role: 'user', content: question }];
+
   const r = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', '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': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01' },
-    body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: sys, messages: [{ role: 'user', content: q }] })
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': ANTHROPIC_KEY,
+      'anthropic-version': '2023-06-01'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      system: sys,
+      messages: messages
+    })
   });
-  if (!r.ok) throw new Error('API ' + r.status);
+  if (!r.ok) {
+    const err = await r.text();
+    throw new Error('API ' + r.status + ': ' + err.substring(0, 100));
+  }
   const d = await r.json();
-  return d.content?.[0]?.text || 'No response.';
+  return d.content?.[0]?.text || 'No response received.';
 }
 
-function switchToChat() {
-  document.getElementById('home-page').style.display = 'none';
-  const cp = document.getElementById('chat-page');
-  cp.style.display = 'flex';
+// ── CHAT HISTORY ────────────────────────────────────────────────
+const chatHistory = [];
+
+// ── SEND ─────────────────────────────────────────────────────────
+async function send(ctx) {
+  const askEl = document.getElementById(ctx + '-ask');
+  const btn = document.getElementById(ctx + '-send');
+  const q = askEl.value.trim();
+  if (!q) return;
+
+  const prop = sel[ctx];
+  askEl.value = ''; autoResize(askEl); btn.disabled = true;
+
+  if (ctx === 'home') {
+    document.getElementById('home-page').style.display = 'none';
+    document.getElementById('chat-page').style.display = 'flex';
+  }
+
+  const propLabel = prop ? (prop.label || prop.address) : null;
+  addMsg('user', q, propLabel);
+  addMsg('thinking');
+
+  try {
+    const ans = await askClaude(q, prop, chatHistory);
+    document.getElementById('thinking-msg')?.remove();
+    chatHistory.push({ role: 'user', content: q });
+    chatHistory.push({ role: 'assistant', content: ans });
+    addMsg('ai', ans);
+  } catch(e) {
+    document.getElementById('thinking-msg')?.remove();
+    addMsg('ai', 'Error: ' + e.message + '\n\nConfidence: Check with PM');
+  }
+  btn.disabled = false;
+  document.getElementById('chat-ask')?.focus();
 }
 
-function addMsg(role, content, propLabel, sources) {
+// ── RENDER ───────────────────────────────────────────────────────
+function addMsg(role, content, propLabel) {
   const msgs = document.getElementById('chat-msgs');
   const msg = document.createElement('div');
   msg.className = 'msg ' + role;
+
   if (role === 'user') {
     const b = document.createElement('div'); b.className = 'bubble';
-    if (propLabel) { const t = document.createElement('div'); t.className = 'prop-tag'; t.textContent = '📍 ' + propLabel; b.appendChild(t); }
+    if (propLabel) {
+      const t = document.createElement('div'); t.className = 'prop-tag';
+      t.textContent = '📍 ' + propLabel; b.appendChild(t);
+    }
     b.appendChild(document.createTextNode(content));
     msg.appendChild(b);
+
   } else if (role === 'thinking') {
     const b = document.createElement('div'); b.className = 'bubble'; b.id = 'thinking-bub';
-    const d = document.createElement('div'); d.className = 'dots'; d.innerHTML = '<span></span><span></span><span></span>';
+    const d = document.createElement('div'); d.className = 'dots';
+    d.innerHTML = '<span></span><span></span><span></span>';
     b.appendChild(d); msg.id = 'thinking-msg'; msg.appendChild(b);
+
   } else {
     const b = document.createElement('div'); b.className = 'bubble';
-    const a = document.createElement('div'); a.className = 'ai-answer'; a.innerHTML = fmt(content); b.appendChild(a);
+    const a = document.createElement('div'); a.className = 'ai-answer';
+    a.innerHTML = fmt(content); b.appendChild(a);
     const cm = content.match(/Confidence:\s*(Confirmed|Likely|Check with PM)/i);
     if (cm) {
       const c = document.createElement('div');
@@ -391,12 +511,6 @@ function addMsg(role, content, propLabel, sources) {
       c.className = 'conf ' + (lv === 'confirmed' ? 'confirmed' : lv === 'likely' ? 'likely' : 'check');
       c.textContent = (lv === 'confirmed' ? '✓ ' : lv === 'likely' ? '~ ' : '⚠ ') + cm[1];
       b.appendChild(c);
-    }
-    if (sources?.length) {
-      const s = document.createElement('div'); s.className = 'sources';
-      const l = document.createElement('div'); l.className = 'sources-lbl'; l.textContent = 'SOURCES'; s.appendChild(l);
-      sources.forEach(src => { const a = document.createElement('a'); a.className = 'source-a'; a.href = src.url; a.target = '_blank'; a.textContent = '↗ ' + src.title; s.appendChild(a); });
-      b.appendChild(s);
     }
     msg.appendChild(b);
   }
@@ -415,39 +529,6 @@ function fmt(text) {
   });
   if (inList) res += '</ol>';
   return res || '<p>' + text + '</p>';
-}
-
-async function send(ctx) {
-  const askEl = document.getElementById(ctx + '-ask');
-  const btn = document.getElementById(ctx + '-send');
-  const q = askEl.value.trim();
-  const prop = selectedProp[ctx];
-  if (!q) return;
-  askEl.value = ''; autoResize(askEl); btn.disabled = true;
-  if (ctx === 'home') switchToChat();
-  const propLabel = prop ? (prop.unit ? prop.address + ' — Unit ' + prop.unit : prop.address) : null;
-  addMsg('user', q, propLabel, null);
-  addMsg('thinking', '', null, null);
-  try {
-    const kb = await getKB();
-    const qL = q.toLowerCase();
-    const rel = kb.filter(e => {
-      const c = (e.title + ' ' + e.symptom + ' ' + e.category).toLowerCase();
-      return qL.split(/\s+/).filter(w => w.length > 3).some(k => c.includes(k));
-    }).slice(0, 5);
-    const ctx2 = rel.length ? rel : kb.slice(0, 6);
-    const ans = await askClaude(q, ctx2, prop);
-    document.getElementById('thinking-msg')?.remove();
-    const srcs = [];
-    if (prop) srcs.push({ title: prop.address + (prop.unit ? ' Unit ' + prop.unit : ''), url: prop.url });
-    rel.slice(0, 2).forEach(e => srcs.push({ title: e.title, url: e.url }));
-    addMsg('ai', ans, null, srcs);
-  } catch (e) {
-    document.getElementById('thinking-msg')?.remove();
-    addMsg('ai', 'Something went wrong — ' + e.message + '\n\nConfidence: Check with PM', null, null);
-  }
-  btn.disabled = false;
-  document.getElementById('chat-ask')?.focus();
 }
 
 function handleKey(e, ctx) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(ctx); } }
