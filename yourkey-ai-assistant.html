@@ -6,92 +6,88 @@
 <title>Your Key — AI Assistant</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&display=swap');
-
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --green:#1D9E75;--green-dark:#17876A;--green-dim:#e8f8f3;
-  --black:#111;--white:#fff;--gray:#f4f4f1;--border:#e4e4de;
-  --muted:#888;--red:#e53e3e;--amber:#d97706;
-  --shadow:0 2px 12px rgba(0,0,0,.08);
+  --green:#1D9E75;--green-dim:#e8f8f3;
+  --black:#111;--gray:#f5f5f2;--border:#e4e4de;
+  --muted:#999;--shadow:0 2px 16px rgba(0,0,0,.09);
 }
 body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);min-height:100vh;display:flex;flex-direction:column}
 
 /* HEADER */
-.header{background:var(--black);padding:0 16px;height:56px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.header{background:var(--black);padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .logo{display:flex;align-items:center;gap:10px}
-.logo-mark{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
-.logo-mark svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
-.logo-text{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.logo-mark{width:26px;height:26px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:14px;height:14px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.logo-text{font-size:14px;font-weight:700;color:#fff}
 .logo-text span{color:var(--green)}
-.header-tag{font-size:11px;font-weight:500;color:rgba(255,255,255,.4);font-family:'DM Mono',monospace;letter-spacing:.04em}
+.badge{font-size:10px;font-weight:600;color:rgba(255,255,255,.35);font-family:'DM Mono',monospace;letter-spacing:.06em;border:1px solid rgba(255,255,255,.15);padding:3px 7px;border-radius:20px}
 
-/* MAIN */
-.main{flex:1;display:flex;flex-direction:column;max-width:640px;width:100%;margin:0 auto;padding:0}
+/* PAGES */
+/* Home page — centered input */
+#home-page{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px 60px}
+.home-icon{width:56px;height:56px;background:var(--black);border-radius:16px;display:flex;align-items:center;justify-content:center;margin-bottom:20px}
+.home-icon svg{width:28px;height:28px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.home-title{font-size:26px;font-weight:700;margin-bottom:8px;text-align:center}
+.home-sub{font-size:14px;color:var(--muted);line-height:1.6;text-align:center;max-width:360px;margin-bottom:32px}
 
-/* CHAT AREA */
-.chat{flex:1;overflow-y:auto;padding:16px 16px 8px;display:flex;flex-direction:column;gap:12px}
+/* Input card — centered on home, fixed bottom on chat */
+.input-card{width:100%;max-width:580px;display:flex;flex-direction:column;gap:10px}
 
-/* WELCOME */
-.welcome{background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;margin-bottom:4px}
-.welcome-title{font-size:17px;font-weight:700;margin-bottom:6px}
-.welcome-sub{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:16px}
-.welcome-examples{display:flex;flex-direction:column;gap:7px}
-.example-btn{text-align:left;padding:10px 13px;background:var(--gray);border:1px solid var(--border);border-radius:9px;font-size:13px;color:var(--black);cursor:pointer;font-family:inherit;line-height:1.4;transition:all .15s}
-.example-btn:hover{background:var(--green-dim);border-color:var(--green)}
-
-/* MESSAGES */
-.msg{display:flex;flex-direction:column;gap:4px;animation:fadeUp .2s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.msg.user{align-items:flex-end}
-.msg.ai{align-items:flex-start}
-.msg-bubble{max-width:88%;padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.55}
-.msg.user .msg-bubble{background:var(--black);color:#fff;border-radius:14px 14px 3px 14px}
-.msg.ai .msg-bubble{background:#fff;border:1px solid var(--border);border-radius:14px 14px 14px 3px;box-shadow:var(--shadow)}
-.msg-meta{font-size:11px;color:var(--muted);padding:0 4px;font-family:'DM Mono',monospace}
-
-/* AI BUBBLE INTERNALS */
-.ai-answer{font-size:14px;line-height:1.6;color:var(--black)}
-.ai-answer strong{font-weight:600}
-.ai-answer ol,.ai-answer ul{padding-left:18px;margin:6px 0}
-.ai-answer li{margin-bottom:3px}
-.ai-answer p{margin-bottom:6px}
-.ai-answer p:last-child{margin-bottom:0}
-.ai-confidence{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:5px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;letter-spacing:.02em}
-.ai-confidence.confirmed{background:var(--green-dim);color:var(--green)}
-.ai-confidence.likely{background:#fef3c7;color:var(--amber)}
-.ai-confidence.check{background:#fff5f5;color:var(--red)}
-.ai-sources{margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:5px}
-.ai-source-label{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:2px}
-.ai-source-link{font-size:12px;color:var(--green);text-decoration:none;font-weight:500}
-.ai-source-link:hover{text-decoration:underline}
-.property-badge{display:inline-flex;align-items:center;gap:5px;background:var(--black);color:#fff;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin-bottom:8px;font-family:'DM Mono',monospace}
-.property-badge::before{content:'📍';font-size:10px}
-
-/* THINKING */
-.thinking-dots{display:flex;gap:4px;padding:4px 0}
-.thinking-dots span{width:7px;height:7px;background:var(--muted);border-radius:50%;animation:dot .8s ease-in-out infinite}
-.thinking-dots span:nth-child(2){animation-delay:.15s}
-.thinking-dots span:nth-child(3){animation-delay:.3s}
-@keyframes dot{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
-
-/* INPUT AREA */
-.input-area{padding:12px 16px 20px;background:var(--gray);flex-shrink:0}
-.property-field{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-.property-input-wrap{flex:1;position:relative}
-.property-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none}
-.property-input{width:100%;padding:9px 12px 9px 30px;border:1.5px solid var(--border);border-radius:9px;font-size:13px;background:#fff;font-family:inherit;color:var(--black);transition:border-color .15s}
-.property-input:focus{outline:none;border-color:var(--black)}
-.property-input::placeholder{color:var(--muted)}
-.property-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;white-space:nowrap;letter-spacing:.04em}
-.input-row{display:flex;gap:8px;align-items:flex-end}
-.question-input{flex:1;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:15px;background:#fff;font-family:inherit;color:var(--black);resize:none;min-height:48px;max-height:120px;line-height:1.4;transition:border-color .15s}
-.question-input:focus{outline:none;border-color:var(--black)}
-.question-input::placeholder{color:var(--muted)}
-.send-btn{width:48px;height:48px;border-radius:12px;background:var(--black);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+/* Ask bar */
+.ask-row{display:flex;gap:8px;align-items:flex-end}
+.ask-wrap{flex:1;position:relative}
+.ask-input{width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:14px;font-size:15px;font-family:'DM Sans',sans-serif;color:var(--black);background:#fff;resize:none;min-height:52px;max-height:140px;line-height:1.4;transition:border-color .15s;box-shadow:0 1px 6px rgba(0,0,0,.05)}
+.ask-input:focus{outline:none;border-color:var(--black)}
+.ask-input::placeholder{color:#bbb}
+.send-btn{width:52px;height:52px;border-radius:14px;background:var(--black);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
 .send-btn:hover{background:#333}
 .send-btn:disabled{background:var(--border);cursor:not-allowed}
 .send-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.input-hint{font-size:11px;color:var(--muted);text-align:center;margin-top:6px;font-family:'DM Mono',monospace}
+
+/* Property row */
+.property-row{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:10px 14px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.property-icon{font-size:15px;flex-shrink:0}
+.property-label{font-size:11px;font-weight:600;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0}
+.property-divider{width:1px;height:16px;background:var(--border);flex-shrink:0}
+.property-input{flex:1;border:none;outline:none;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--black);background:transparent}
+.property-input::placeholder{color:#bbb}
+.hint{font-size:11px;color:var(--muted);text-align:center;font-family:'DM Mono',monospace;letter-spacing:.02em}
+
+/* Chat page */
+#chat-page{flex:1;display:none;flex-direction:column;overflow:hidden}
+.chat-msgs{flex:1;overflow-y:auto;padding:20px 16px 12px;display:flex;flex-direction:column;gap:14px;max-width:680px;width:100%;margin:0 auto}
+.chat-bottom{border-top:1px solid var(--border);background:var(--gray);padding:12px 16px 20px}
+.chat-bottom-inner{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+
+/* Messages */
+.msg{display:flex;flex-direction:column;animation:fadeUp .18s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.msg.user{align-items:flex-end}
+.msg.ai{align-items:flex-start}
+.bubble{max-width:86%;padding:12px 15px;border-radius:16px;font-size:14px;line-height:1.55}
+.msg.user .bubble{background:var(--black);color:#fff;border-radius:16px 16px 4px 16px}
+.msg.ai .bubble{background:#fff;border:1px solid var(--border);border-radius:4px 16px 16px 16px;box-shadow:var(--shadow)}
+.prop-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;margin-bottom:6px;font-family:'DM Mono',monospace}
+.ai-answer{font-size:14px;line-height:1.6}
+.ai-answer strong{font-weight:600}
+.ai-answer ol,.ai-answer ul{padding-left:18px;margin:6px 0}
+.ai-answer li{margin-bottom:4px}
+.ai-answer p{margin-bottom:6px}
+.ai-answer p:last-child{margin-bottom:0}
+.conf{display:inline-flex;align-items:center;gap:5px;margin-top:10px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace}
+.conf.confirmed{background:var(--green-dim);color:var(--green)}
+.conf.likely{background:#fef3c7;color:#b45309}
+.conf.check{background:#fff1f2;color:#be123c}
+.sources{margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.sources-lbl{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:4px;letter-spacing:.04em}
+.source-a{display:block;font-size:12px;color:var(--green);text-decoration:none;font-weight:500;margin-bottom:2px}
+.source-a:hover{text-decoration:underline}
+.dots{display:flex;gap:4px;padding:4px 0}
+.dots span{width:7px;height:7px;background:#ccc;border-radius:50%;animation:dot .8s ease-in-out infinite}
+.dots span:nth-child(2){animation-delay:.15s}
+.dots span:nth-child(3){animation-delay:.3s}
+@keyframes dot{0%,80%,100%{opacity:.3;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -103,371 +99,179 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);
     </div>
     <div class="logo-text">Your <span>Key</span> Assistant</div>
   </div>
-  <div class="header-tag">AI · BETA</div>
+  <div class="badge">AI · BETA</div>
 </div>
 
-<div class="main">
-  <div class="chat" id="chat">
-    <div class="welcome" id="welcome">
-      <div class="welcome-title">Ask anything about a property or guest issue</div>
-      <div class="welcome-sub">I search your Knowledge Base and property records to give you a specific, actionable answer. Add a property address to get property-specific details.</div>
-      <div class="welcome-examples">
-        <button class="example-btn" onclick="useExample(this)">Guest says the door code isn't working — what do I do?</button>
-        <button class="example-btn" onclick="useExample(this)">How do I handle a guest requesting early check-in?</button>
-        <button class="example-btn" onclick="useExample(this)">No hot water complaint — step by step?</button>
-        <button class="example-btn" onclick="useExample(this)">Guest asking about parking at 606 135 13th Ave SW</button>
-      </div>
-    </div>
+<!-- HOME PAGE — everything centred -->
+<div id="home-page">
+  <div class="home-icon">
+    <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
   </div>
-
-  <div class="input-area">
-    <div class="property-field">
-      <div class="property-label">PROPERTY</div>
-      <div class="property-input-wrap">
-        <span class="property-icon">📍</span>
-        <input type="text" class="property-input" id="property-input" placeholder="Address (optional — makes answer property-specific)">
-      </div>
+  <div class="home-title">Ask me anything</div>
+  <div class="home-sub">Type a guest issue, property question, or process question. Add a property address for specific answers.</div>
+  <div class="input-card">
+    <div class="property-row">
+      <span class="property-icon">📍</span>
+      <span class="property-label">PROPERTY</span>
+      <div class="property-divider"></div>
+      <input type="text" class="property-input" id="home-property" placeholder="Address, building, or unit (optional)">
     </div>
-    <div class="input-row">
-      <textarea class="question-input" id="question-input" placeholder="Ask about a guest issue, property, or process..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-      <button class="send-btn" id="send-btn" onclick="sendQuestion()">
+    <div class="ask-row">
+      <div class="ask-wrap">
+        <textarea class="ask-input" id="home-ask" placeholder="e.g. Guest says the door code isn't working at 606 135 13th Ave SW..." rows="1" onkeydown="handleKey(event,'home')" oninput="autoResize(this)"></textarea>
+      </div>
+      <button class="send-btn" id="home-send" onclick="send('home')">
         <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
       </button>
     </div>
-    <div class="input-hint">Powered by Your Key KB · GE Master · SOPs</div>
+    <div class="hint">Searches Knowledge Base · GE Master · SOPs</div>
+  </div>
+</div>
+
+<!-- CHAT PAGE — messages above, input fixed at bottom -->
+<div id="chat-page">
+  <div class="chat-msgs" id="chat-msgs"></div>
+  <div class="chat-bottom">
+    <div class="chat-bottom-inner">
+      <div class="property-row">
+        <span class="property-icon">📍</span>
+        <span class="property-label">PROPERTY</span>
+        <div class="property-divider"></div>
+        <input type="text" class="property-input" id="chat-property" placeholder="Address, building, or unit (optional)">
+      </div>
+      <div class="ask-row">
+        <div class="ask-wrap">
+          <textarea class="ask-input" id="chat-ask" placeholder="Ask a follow-up..." rows="1" onkeydown="handleKey(event,'chat')" oninput="autoResize(this)"></textarea>
+        </div>
+        <button class="send-btn" id="chat-send" onclick="send('chat')">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
 <script>
-// ── CONFIG ──────────────────────────────────────────────────────────────────
-const ANTHROPIC_TOKEN = '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';
-const NOTION_VERSION = '2022-06-28';
-const KB_DB_ID = '7b324a42-e2bd-445f-8423-e93dccf64592';
-const GE_MASTER_DB_ID = '32dc074e-62db-81f4-86c1-000b8d740f68';
-const GE_MASTER_VIEW_ID = '32dc074e-62db-813f-be14-000c2360978a';
+const NOTION_TOKEN='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';
+const KB_DB_ID='7b324a42-e2bd-445f-8423-e93dccf64592';
+const GE_DB_ID='32dc074e-62db-81f4-86c1-000b8d740f68';
 
-// ── NOTION API ───────────────────────────────────────────────────────────────
-async function queryNotion(endpoint, body) {
-  const r = await fetch('https://api.notion.com/v1/' + endpoint, {
-    method: 'POST',
-    headers: {
-      'Authorization': 'Bearer ' + ANTHROPIC_TOKEN,
-      'Notion-Version': NOTION_VERSION,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
-  });
+async function notionPost(ep,body){
+  const r=await fetch('https://api.notion.com/v1/'+ep,{method:'POST',headers:{'Authorization':'Bearer '+NOTION_TOKEN,'Notion-Version':'2022-06-28','Content-Type':'application/json'},body:JSON.stringify(body)});
   return r.json();
 }
 
-async function fetchKBEntries() {
-  const d = await queryNotion('databases/' + KB_DB_ID + '/query', {
-    filter: { property: 'Verification status', status: { equals: 'Verified' } },
-    page_size: 50
-  });
-  return (d.results || []).map(p => {
-    const props = p.properties;
-    const getText = key => props[key]?.rich_text?.[0]?.plain_text || props[key]?.title?.[0]?.plain_text || '';
-    return {
-      title: getText('Note'),
-      symptom: getText('Symptom / Question'),
-      resolution: getText('Resolution / Answer'),
-      category: props['Category']?.select?.name || '',
-      confidence: props['Confidence']?.select?.name || '',
-      url: p.url
-    };
-  }).filter(e => e.resolution);
+async function getKB(){
+  const d=await notionPost('databases/'+KB_DB_ID+'/query',{filter:{property:'Verification status',status:{equals:'Verified'}},page_size:60});
+  return(d.results||[]).map(p=>{
+    const g=k=>p.properties[k]?.rich_text?.[0]?.plain_text||p.properties[k]?.title?.[0]?.plain_text||'';
+    return{title:g('Note'),symptom:g('Symptom / Question'),resolution:g('Resolution / Answer'),category:p.properties['Category']?.select?.name||'',url:p.url};
+  }).filter(e=>e.resolution);
 }
 
-async function searchPropertyByAddress(address) {
-  if (!address.trim()) return null;
-  const d = await queryNotion('databases/' + GE_MASTER_DB_ID + '/query', {
-    filter: { property: 'Address', rich_text: { contains: address.trim() } },
-    page_size: 3
-  });
-  if (!d.results?.length) return null;
-  const p = d.results[0];
-  const props = p.properties;
-  const getText = key => {
-    const prop = props[key];
-    if (!prop) return '';
-    return prop.rich_text?.[0]?.plain_text || prop.title?.[0]?.plain_text || prop.select?.name || prop.phone_number || prop.email || prop.url || '';
-  };
-  return {
-    address: getText('Address'),
-    unit: getText('Unit Number'),
-    building: getText('Building Name'),
-    client: getText('Client'),
-    wifi: getText('Wifi Network'),
-    wifiPass: getText('Wifi Password'),
-    checkin: getText('Check-in process (how to access the unit)') || getText('Check-In') || '',
-    parking: getText('Parking (Yes/ No) Stall #'),
-    parkingProcess: getText('Parking Process'),
-    parkingHeight: getText('Parking Height and Measurements'),
-    visitorParking: getText('Visitor Parking'),
-    intercom: getText('Intercom code (if applicable)') || getText('Intercom') || '',
-    keys: getText('Keys/fobs for guests') || '',
-    waterShutoff: getText('Emergency water shutoff location') || '',
-    furnaceFilter: getText('Furnace filter SIZE'),
-    furnaceRoom: getText('Furnace Room') || '',
-    panel: getText('Electrical Panel') || '',
-    modem: getText('Internet Modem Location'),
-    isp: getText('Provider'),
-    buildingMgmt: getText('Building Management Company'),
-    stove: getText('What type of stove? Electric, induction, gas?'),
-    garbage: getText('Garbage & Recycling Bins') || '',
-    notes: getText('Notes'),
-    url: p.url
-  };
+async function getProperty(addr){
+  if(!addr.trim())return null;
+  const d=await notionPost('databases/'+GE_DB_ID+'/query',{filter:{property:'Address',rich_text:{contains:addr.trim()}},page_size:3});
+  if(!d.results?.length)return null;
+  const p=d.results[0];
+  const g=k=>{const pr=p.properties[k];if(!pr)return'';return pr.rich_text?.[0]?.plain_text||pr.title?.[0]?.plain_text||pr.select?.name||pr.phone_number||pr.email||pr.url||'';};
+  return{address:g('Address'),unit:g('Unit Number'),wifi:g('Wifi Network'),wifiPass:g('Wifi Password'),checkin:g('Check-in process (how to access the unit)')||g('Check-In'),parking:g('Parking (Yes/ No)\nStall #'),parkingProcess:g('Parking Process'),intercom:g('Intercom Dial Code and Business hours'),buildingMgmt:g('Building Management Company'),garbage:g('Garbage & Recycling Bins (Calgary Waste URL)'),modem:g('Internet Modem Location'),isp:g('Provider'),url:p.url};
 }
 
-// ── ANTHROPIC API ────────────────────────────────────────────────────────────
-async function askClaude(question, kbEntries, property) {
-  let systemPrompt = `You are the Your Key Rental Management internal AI assistant. Your job is to help GRAs, STR Associates, and Portfolio Managers handle guest issues and operational questions quickly and accurately.
-
-You have access to two sources of information:
-1. The Your Key Property Knowledge Base — verified issue/resolution pairs
-2. The GE Master property record — property-specific details
-
-RESPONSE FORMAT (always follow this exactly):
-- Start with a direct, actionable answer
-- Use numbered steps if there is a process to follow
-- If property-specific data is relevant, lead with those specific details (WiFi password, parking stall, etc.)
-- End with a CONFIDENCE line: "Confidence: [Confirmed / Likely / Check with PM]"
-- If escalation is needed, say so clearly
-- Keep it concise — the person reading this is probably dealing with an active situation
-- Never say "I don't know" — if you're uncertain, give the best guidance and flag it
-
-ESCALATION RULES (always flag these):
-- Safety issues → 911 first, then Duncan
-- Refund or compensation requests → Portfolio Manager, never commit
-- Owner access during live booking → Duncan only
-- Cost over $500 → Duncan approval`;
-
-  const kbContext = kbEntries.length > 0
-    ? '\n\n## KNOWLEDGE BASE ENTRIES\n' + kbEntries.map(e =>
-        `### ${e.title}\nCategory: ${e.category}\nSymptom: ${e.symptom}\nResolution: ${e.resolution}\nConfidence: ${e.confidence}`
-      ).join('\n\n')
-    : '';
-
-  let propertyContext = '';
-  if (property) {
-    propertyContext = `\n\n## PROPERTY RECORD — ${property.address}${property.unit ? ' Unit ' + property.unit : ''}\n`;
-    if (property.building) propertyContext += `Building: ${property.building}\n`;
-    if (property.client) propertyContext += `Owner: ${property.client}\n`;
-    if (property.wifi) propertyContext += `WiFi Network: ${property.wifi}\nWiFi Password: ${property.wifiPass}\n`;
-    if (property.checkin) propertyContext += `Check-in process: ${property.checkin}\n`;
-    if (property.intercom) propertyContext += `Intercom: ${property.intercom}\n`;
-    if (property.keys) propertyContext += `Keys/fobs: ${property.keys}\n`;
-    if (property.parking) propertyContext += `Parking: ${property.parking}\n`;
-    if (property.parkingProcess) propertyContext += `Parking process: ${property.parkingProcess}\n`;
-    if (property.parkingHeight) propertyContext += `Parking height: ${property.parkingHeight}\n`;
-    if (property.visitorParking) propertyContext += `Visitor parking: ${property.visitorParking}\n`;
-    if (property.waterShutoff) propertyContext += `Water shutoff: ${property.waterShutoff}\n`;
-    if (property.furnaceFilter) propertyContext += `Furnace filter: ${property.furnaceFilter}\n`;
-    if (property.furnaceRoom) propertyContext += `Furnace room: ${property.furnaceRoom}\n`;
-    if (property.panel) propertyContext += `Electrical panel: ${property.panel}\n`;
-    if (property.modem) propertyContext += `Modem location: ${property.modem}\n`;
-    if (property.isp) propertyContext += `Internet provider: ${property.isp}\n`;
-    if (property.buildingMgmt) propertyContext += `Building management: ${property.buildingMgmt}\n`;
-    if (property.garbage) propertyContext += `Garbage/recycling: ${property.garbage}\n`;
-    if (property.stove) propertyContext += `Stove type: ${property.stove}\n`;
-    if (property.notes) propertyContext += `Property notes: ${property.notes}\n`;
+async function askClaude(q,kb,prop){
+  let sys='You are the Your Key Rental Management internal AI assistant for Calgary STR operations. Answer concisely and actionably.\n\nFORMAT: Direct answer, numbered steps if procedural, end with "Confidence: [Confirmed / Likely / Check with PM]".\n\nESCALATE TO PM: refunds, compensation, costs over $200, owner contact, safety emergencies (911 first).';
+  if(kb.length)sys+='\n\n## KNOWLEDGE BASE\n'+kb.map(e=>'### '+e.title+'\nQ: '+e.symptom+'\nA: '+e.resolution).join('\n\n');
+  if(prop){
+    sys+='\n\n## PROPERTY: '+prop.address+(prop.unit?' Unit '+prop.unit:'');
+    if(prop.wifi)sys+='\nWiFi: '+prop.wifi+' / '+prop.wifiPass;
+    if(prop.checkin)sys+='\nCheck-in: '+prop.checkin;
+    if(prop.intercom)sys+='\nIntercom: '+prop.intercom;
+    if(prop.parking)sys+='\nParking: '+prop.parking;
+    if(prop.parkingProcess)sys+='\nParking process: '+prop.parkingProcess;
+    if(prop.buildingMgmt)sys+='\nBuilding mgmt: '+prop.buildingMgmt;
+    if(prop.modem)sys+='\nModem: '+prop.modem;
+    if(prop.garbage)sys+='\nGarbage: '+prop.garbage;
   }
-
-  const fullSystem = systemPrompt + kbContext + propertyContext;
-
-  const r = await fetch('https://api.anthropic.com/v1/messages', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 1000,
-      system: fullSystem,
-      messages: [{ role: 'user', content: question }]
-    })
-  });
-  const d = await r.json();
-  return d.content?.[0]?.text || 'Sorry, I could not generate a response. Please try again.';
+  const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,system:sys,messages:[{role:'user',content:q}]})});
+  const d=await r.json();
+  return d.content?.[0]?.text||'Sorry, something went wrong.';
 }
 
-// ── CHAT UI ───────────────────────────────────────────────────────────────────
-function addMessage(role, content, property, sources) {
-  const chat = document.getElementById('chat');
-  const welcome = document.getElementById('welcome');
-  if (welcome) welcome.remove();
+function switchToChat(){
+  document.getElementById('home-page').style.display='none';
+  const cp=document.getElementById('chat-page');
+  cp.style.display='flex';
+  // sync property field
+  document.getElementById('chat-property').value=document.getElementById('home-property').value;
+}
 
-  const msg = document.createElement('div');
-  msg.className = 'msg ' + role;
-
-  if (role === 'user') {
-    const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
-    if (property) {
-      const badge = document.createElement('div');
-      badge.className = 'property-badge';
-      badge.textContent = property;
-      bubble.appendChild(badge);
-    }
-    bubble.appendChild(document.createTextNode(content));
-    msg.appendChild(bubble);
-  } else if (role === 'ai') {
-    const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
-
-    // Format the response
-    const answer = document.createElement('div');
-    answer.className = 'ai-answer';
-    answer.innerHTML = formatAnswer(content);
-    bubble.appendChild(answer);
-
-    // Confidence badge
-    const confMatch = content.match(/Confidence:\s*(Confirmed|Likely|Check with PM|Unverified)/i);
-    if (confMatch) {
-      const conf = document.createElement('div');
-      const level = confMatch[1].toLowerCase();
-      conf.className = 'ai-confidence ' + (level === 'confirmed' ? 'confirmed' : level === 'likely' ? 'likely' : 'check');
-      conf.innerHTML = (level === 'confirmed' ? '✓ ' : level === 'likely' ? '~ ' : '⚠ ') + confMatch[1];
-      bubble.appendChild(conf);
-    }
-
-    // Sources
-    if (sources?.length) {
-      const sourcesDiv = document.createElement('div');
-      sourcesDiv.className = 'ai-sources';
-      const label = document.createElement('div');
-      label.className = 'ai-source-label';
-      label.textContent = 'SOURCES';
-      sourcesDiv.appendChild(label);
-      sources.forEach(s => {
-        const link = document.createElement('a');
-        link.className = 'ai-source-link';
-        link.href = s.url;
-        link.target = '_blank';
-        link.textContent = '↗ ' + s.title;
-        sourcesDiv.appendChild(link);
-      });
-      bubble.appendChild(sourcesDiv);
-    }
-
-    msg.appendChild(bubble);
-  } else if (role === 'thinking') {
-    const bubble = document.createElement('div');
-    bubble.className = 'msg-bubble';
-    bubble.id = 'thinking-bubble';
-    const dots = document.createElement('div');
-    dots.className = 'thinking-dots';
-    dots.innerHTML = '<span></span><span></span><span></span>';
-    bubble.appendChild(dots);
-    msg.appendChild(bubble);
-    msg.id = 'thinking-msg';
+function addMsg(role,content,propLabel,sources){
+  const msgs=document.getElementById('chat-msgs');
+  const msg=document.createElement('div');
+  msg.className='msg '+role;
+  if(role==='user'){
+    const b=document.createElement('div');b.className='bubble';
+    if(propLabel){const t=document.createElement('div');t.className='prop-tag';t.textContent='📍 '+propLabel;b.appendChild(t);}
+    b.appendChild(document.createTextNode(content));
+    msg.appendChild(b);
+  }else if(role==='thinking'){
+    const b=document.createElement('div');b.className='bubble';b.id='thinking-bub';
+    const d=document.createElement('div');d.className='dots';d.innerHTML='<span></span><span></span><span></span>';
+    b.appendChild(d);msg.id='thinking-msg';msg.appendChild(b);
+  }else{
+    const b=document.createElement('div');b.className='bubble';
+    const a=document.createElement('div');a.className='ai-answer';a.innerHTML=fmt(content);b.appendChild(a);
+    const cm=content.match(/Confidence:\s*(Confirmed|Likely|Check with PM)/i);
+    if(cm){const c=document.createElement('div');const lv=cm[1].toLowerCase().replace(/ /g,'-');c.className='conf '+(lv==='confirmed'?'confirmed':lv==='likely'?'likely':'check');c.textContent=(lv==='confirmed'?'✓ ':lv==='likely'?'~ ':'⚠ ')+cm[1];b.appendChild(c);}
+    if(sources?.length){const s=document.createElement('div');s.className='sources';const l=document.createElement('div');l.className='sources-lbl';l.textContent='SOURCES';s.appendChild(l);sources.forEach(src=>{const a=document.createElement('a');a.className='source-a';a.href=src.url;a.target='_blank';a.textContent='↗ '+src.title;s.appendChild(a);});b.appendChild(s);}
+    msg.appendChild(b);
   }
-
-  chat.appendChild(msg);
-  chat.scrollTop = chat.scrollHeight;
-  return msg;
+  msgs.appendChild(msg);
+  msgs.scrollTop=msgs.scrollHeight;
 }
 
-function formatAnswer(text) {
-  // Remove the confidence line from the display (we show it as a badge)
-  text = text.replace(/\n?Confidence:\s*.+$/im, '');
-  // Convert numbered lists
-  text = text.replace(/^(\d+)\.\s/gm, '<li>');
-  if (text.includes('<li>')) {
-    text = '<ol>' + text.split('\n').filter(l => l.startsWith('<li>')).map(l => l + '</li>').join('') + '</ol>';
+function fmt(text){
+  text=text.replace(/\nConfidence:\s*.+$/im,'');
+  text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  const lines=text.split('\n');let inList=false,res='';
+  lines.forEach(l=>{const n=l.match(/^(\d+)\.\s/);if(n){if(!inList){res+='<ol>';inList=true;}res+='<li>'+l.replace(/^\d+\.\s/,'')+'</li>';}else{if(inList){res+='</ol>';inList=false;}if(l.trim())res+='<p>'+l+'</p>';}});
+  if(inList)res+='</ol>';
+  return res||'<p>'+text+'</p>';
+}
+
+async function send(ctx){
+  const askEl=document.getElementById(ctx+'-ask');
+  const propEl=document.getElementById(ctx+'-property');
+  const btn=document.getElementById(ctx+'-send');
+  const q=askEl.value.trim();
+  const addr=propEl.value.trim();
+  if(!q)return;
+  askEl.value='';autoResize(askEl);btn.disabled=true;
+  if(ctx==='home')switchToChat();
+  addMsg('user',q,addr||null,null);
+  addMsg('thinking','',null,null);
+  try{
+    const[kb,prop]=await Promise.all([getKB(),addr?getProperty(addr):Promise.resolve(null)]);
+    const qL=q.toLowerCase();
+    const rel=kb.filter(e=>{const c=(e.title+' '+e.symptom+' '+e.category).toLowerCase();return qL.split(/\s+/).filter(w=>w.length>3).some(k=>c.includes(k));}).slice(0,5);
+    const ctx2=rel.length?rel:kb.slice(0,6);
+    const ans=await askClaude(q,ctx2,prop);
+    document.getElementById('thinking-msg')?.remove();
+    const srcs=[];
+    if(prop)srcs.push({title:prop.address+(prop.unit?' Unit '+prop.unit:''),url:prop.url});
+    rel.slice(0,2).forEach(e=>srcs.push({title:e.title,url:e.url}));
+    addMsg('ai',ans,null,srcs);
+  }catch(e){
+    document.getElementById('thinking-msg')?.remove();
+    addMsg('ai','Something went wrong — check your connection.\n\nConfidence: Check with PM',null,null);
   }
-  // Bold
-  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-  // Paragraphs
-  text = text.split('\n\n').map(p => p.trim()).filter(Boolean)
-    .map(p => p.startsWith('<ol>') || p.startsWith('<ul>') ? p : '<p>' + p + '</p>')
-    .join('');
-  return text;
+  btn.disabled=false;
+  // focus chat ask for follow-up
+  document.getElementById('chat-ask')?.focus();
 }
 
-function addThinking() {
-  return addMessage('thinking', '', null, null);
-}
-
-function removeThinking() {
-  const el = document.getElementById('thinking-msg');
-  if (el) el.remove();
-}
-
-// ── SEND ─────────────────────────────────────────────────────────────────────
-async function sendQuestion() {
-  const qInput = document.getElementById('question-input');
-  const pInput = document.getElementById('property-input');
-  const btn = document.getElementById('send-btn');
-  const question = qInput.value.trim();
-  const propertyAddress = pInput.value.trim();
-  if (!question) return;
-
-  qInput.value = '';
-  autoResize(qInput);
-  btn.disabled = true;
-
-  addMessage('user', question, propertyAddress || null, null);
-  addThinking();
-
-  try {
-    // Parallel fetch: KB entries + property record
-    const [kbEntries, property] = await Promise.all([
-      fetchKBEntries(),
-      propertyAddress ? searchPropertyByAddress(propertyAddress) : Promise.resolve(null)
-    ]);
-
-    // Find relevant KB entries based on question keywords
-    const qLower = question.toLowerCase();
-    const relevantKB = kbEntries.filter(e => {
-      const combined = (e.title + e.symptom + e.category).toLowerCase();
-      const keywords = qLower.split(/\s+/).filter(w => w.length > 3);
-      return keywords.some(k => combined.includes(k));
-    }).slice(0, 4); // max 4 entries for context
-
-    // If no keyword match, include all — Claude will select what's relevant
-    const contextKB = relevantKB.length > 0 ? relevantKB : kbEntries.slice(0, 6);
-
-    const answer = await askClaude(question, contextKB, property);
-
-    removeThinking();
-
-    // Build sources list
-    const sources = [];
-    if (property) sources.push({ title: property.address + (property.unit ? ' (Unit ' + property.unit + ')' : ''), url: property.url });
-    relevantKB.slice(0, 2).forEach(e => sources.push({ title: e.title, url: e.url }));
-
-    addMessage('ai', answer, null, sources);
-  } catch (err) {
-    removeThinking();
-    addMessage('ai', 'Something went wrong — check your connection and try again.\n\nConfidence: Check with PM', null, null);
-  }
-
-  btn.disabled = false;
-}
-
-function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendQuestion(); }
-}
-
-function autoResize(el) {
-  el.style.height = 'auto';
-  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
-}
-
-function useExample(btn) {
-  const q = btn.textContent;
-  // Check if it contains an address and pre-fill property field
-  const addressMatch = q.match(/at (.+)$/);
-  if (addressMatch) {
-    document.getElementById('property-input').value = addressMatch[1];
-    document.getElementById('question-input').value = q.replace(' at ' + addressMatch[1], '');
-  } else {
-    document.getElementById('question-input').value = q;
-  }
-  document.getElementById('question-input').focus();
-  autoResize(document.getElementById('question-input'));
-}
+function handleKey(e,ctx){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(ctx);}}
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,140)+'px';}
 </script>
 </body>
 </html>
