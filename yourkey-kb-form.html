@@ -106,9 +106,8 @@ async function submitEntry(){
           'Symptom / Question':{rich_text:[{text:{content:symptom.substring(0,2000)}}]},
           'Resolution / Answer':{rich_text:[{text:{content:resolution.substring(0,2000)}}]},
           'Category':{select:{name:category}},
-          'Confidence':{select:{name:'Likely'}},
+          'Confidence':{select:{name:'Unverified'}},
           'Source':{select:{name:'GRA'}},
-          'Verification status':{status:{name:'Needs verification'}},
           'Extra notes':{rich_text:[{text:{content:extraNotes}}]}
         }
       })
