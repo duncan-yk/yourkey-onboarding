@@ -150,15 +150,32 @@ async function submitEntry(){
   const notes=document.getElementById('notes').value.trim();
   const btn=document.getElementById('submit-btn');
   btn.disabled=true;btn.textContent='Submitting...';
+  const note=(property==='General'?'General - ':property+' - ')+symptom.substring(0,60);
+  const extraNotes='Property: '+property+'\nSubmitted by: '+submitter+(notes?'\n'+notes:'');
   try{
-    const r=await fetch('/kb-submit',{
+    const r=await fetch('https://api.notion.com/v1/pages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({property,symptom,resolution,category,submitter,notes})
+      headers:{
+        'Authorization':'Bearer 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',
+        'Content-Type':'application/json',
+        'Notion-Version':'2022-06-28'
+      },
+      body:JSON.stringify({
+        parent:{database_id:'7b324a42-e2bd-445f-8423-e93dccf64592'},
+        properties:{
+          'Note':{title:[{text:{content:note.substring(0,80)}}]},
+          'Symptom / Question':{rich_text:[{text:{content:symptom.substring(0,2000)}}]},
+          'Resolution / Answer':{rich_text:[{text:{content:resolution.substring(0,2000)}}]},
+          'Category':{select:{name:category}},
+          'Confidence':{select:{name:'Unverified'}},
+          'Source':{select:{name:'GRA'}},
+          'Extra notes':{rich_text:[{text:{content:extraNotes}}]}
+        }
+      })
     });
     if(r.ok){document.getElementById('form-wrap').style.display='none';document.getElementById('success').style.display='block';}
-    else{const err=await r.json();throw new Error(err.error||'Server error '+r.status);}
-  }catch(e){alert('Something went wrong. Please try again.\n'+e.message);btn.disabled=false;btn.textContent='Submit KB Entry';}
+    else{const err=await r.json();throw new Error(err.message||'Notion error '+r.status);}
+  }catch(e){alert('Something went wrong: '+e.message);btn.disabled=false;btn.textContent='Submit KB Entry';}
 }
 
 function resetForm(){
