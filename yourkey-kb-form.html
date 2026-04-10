@@ -9,6 +9,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--green:#1D9E75;--black:#111;--gray:#f4f4f1;--border:#e4e4de;--muted:#888;--shadow:0 2px 12px rgba(0,0,0,.08)}
 body{font-family:'DM Sans',sans-serif;background:var(--gray);color:var(--black);min-height:100vh}
+.prop-wrap{position:relative}
+.prop-dropdown{display:none;position:absolute;top:100%;left:0;right:0;background:#fff;border:1.5px solid var(--black);border-top:none;border-radius:0 0 10px 10px;max-height:220px;overflow-y:auto;z-index:100;box-shadow:var(--shadow)}
+.prop-dropdown.open{display:block}
+.prop-option{padding:10px 14px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--border)}
+.prop-option:last-child{border-bottom:none}
+.prop-option:hover,.prop-option.active{background:var(--gray)}
+.prop-option mark{background:transparent;color:var(--green);font-weight:700}
 .header{background:var(--black);padding:0 20px;height:56px;display:flex;align-items:center;gap:10px}
 .logo-mark{width:28px;height:28px;background:var(--green);border-radius:6px;display:flex;align-items:center;justify-content:center}
 .logo-mark svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
@@ -43,7 +50,10 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
   <div id="form-wrap">
     <div class="form-group">
       <label>PROPERTY ADDRESS</label>
-      <input type="text" id="property" placeholder="e.g. 606 135 13th Ave SW — or leave blank for general">
+      <div class="prop-wrap">
+        <input type="text" id="property" placeholder="Type to search — or leave blank for general" autocomplete="off" oninput="filterProps()" onfocus="filterProps()" onblur="setTimeout(closeProps,150)" onkeydown="navProps(event)">
+        <div class="prop-dropdown" id="prop-dropdown"></div>
+      </div>
     </div>
     <div class="form-group">
       <label>ISSUE / SYMPTOM *</label>
@@ -80,8 +90,55 @@ textarea{resize:vertical;min-height:80px;line-height:1.5}
   </div>
 </div>
 <script>
-const NOTION_TOKEN='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';
-const KB_DB_ID='7b324a42-e2bd-445f-8423-e93dccf64592';
+const PROPS = [
+  '18 Country Village Gate NE','21 Kinlea Common NW','48 Cityscape Row NE',
+  '51 Cornerbrook Gate NE','56 Nolancrest Manor NW (UPPER)','56 Nolancrest Manor BASEMENT',
+  '115 Kincora Heath NW','128 Bernard Close UPPER','156 Sugarsnap Way SE',
+  '156 Sugarsnap Way SE (A) - Upper','156 Sugarsnap Way SE (B) - Lower',
+  '207 562 Seton Circle SE','222 Riverfront Av','273 Livingston',
+  '307 Casel','321 Harvest Hills Way NE','321 Harvest Hills Basement',
+  '323 327 9A ST NW','323R 327 9A ST NW','384 Seton Passage SE',
+  '404 Cranbrook Gardens','520 2nd Street NE','606 - 135 13th Avenue SW',
+  '834 - Cobblefield Manor SW','914 ERA','1010 Verve',
+  '1501-8500 19 Avenue SE','1809 1188 3rd Street SE',
+  '2-3812 Parkhill Place SW','2223 222 Riverfront Av',
+  '6612 Bow Crescent NW'
+];
+
+let activeIdx = -1;
+
+function filterProps() {
+  const q = document.getElementById('property').value.toLowerCase();
+  const dd = document.getElementById('prop-dropdown');
+  const matches = q.length === 0 ? PROPS : PROPS.filter(p => p.toLowerCase().includes(q));
+  if (!matches.length) { dd.classList.remove('open'); return; }
+  activeIdx = -1;
+  dd.innerHTML = matches.map((p,i) => {
+    const hi = q ? p.replace(new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','gi'), '<mark>$1</mark>') : p;
+    return `<div class="prop-option" data-val="${p}" onmousedown="selectProp('${p.replace(/'/,"\\'")}')">${hi}</div>`;
+  }).join('');
+  dd.classList.add('open');
+}
+
+function selectProp(val) {
+  document.getElementById('property').value = val;
+  document.getElementById('prop-dropdown').classList.remove('open');
+}
+
+function closeProps() {
+  document.getElementById('prop-dropdown').classList.remove('open');
+}
+
+function navProps(e) {
+  const opts = document.querySelectorAll('.prop-option');
+  if (!opts.length) return;
+  if (e.key === 'ArrowDown') { activeIdx = Math.min(activeIdx+1, opts.length-1); }
+  else if (e.key === 'ArrowUp') { activeIdx = Math.max(activeIdx-1, 0); }
+  else if (e.key === 'Enter' && activeIdx >= 0) { selectProp(opts[activeIdx].dataset.val); e.preventDefault(); return; }
+  else if (e.key === 'Escape') { closeProps(); return; }
+  opts.forEach((o,i) => o.classList.toggle('active', i===activeIdx));
+  if (activeIdx >= 0) opts[activeIdx].scrollIntoView({block:'nearest'});
+}
 
 async function submitEntry(){
   const symptom=document.getElementById('symptom').value.trim();
@@ -93,27 +150,14 @@ async function submitEntry(){
   const notes=document.getElementById('notes').value.trim();
   const btn=document.getElementById('submit-btn');
   btn.disabled=true;btn.textContent='Submitting...';
-  const note=(property==='General'?'General — ':property+' — ')+symptom.substring(0,60);
-  const extraNotes='Property: '+property+'\nSubmitted by: '+submitter+(notes?'\n'+notes:'');
   try{
-    const r=await fetch('https://api.notion.com/v1/pages',{
+    const r=await fetch('/kb-submit',{
       method:'POST',
-      headers:{'Authorization':'Bearer '+NOTION_TOKEN,'Notion-Version':'2022-06-28','Content-Type':'application/json'},
-      body:JSON.stringify({
-        parent:{database_id:KB_DB_ID},
-        properties:{
-          'Note':{title:[{text:{content:note.substring(0,80)}}]},
-          'Symptom / Question':{rich_text:[{text:{content:symptom.substring(0,2000)}}]},
-          'Resolution / Answer':{rich_text:[{text:{content:resolution.substring(0,2000)}}]},
-          'Category':{select:{name:category}},
-          'Confidence':{select:{name:'Unverified'}},
-          'Source':{select:{name:'GRA'}},
-          'Extra notes':{rich_text:[{text:{content:extraNotes}}]}
-        }
-      })
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({property,symptom,resolution,category,submitter,notes})
     });
     if(r.ok){document.getElementById('form-wrap').style.display='none';document.getElementById('success').style.display='block';}
-    else{throw new Error('API error '+r.status);}
+    else{const err=await r.json();throw new Error(err.error||'Server error '+r.status);}
   }catch(e){alert('Something went wrong. Please try again.\n'+e.message);btn.disabled=false;btn.textContent='Submit KB Entry';}
 }
 
